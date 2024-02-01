@@ -1,49 +1,3 @@
-/* 
-	THEMING
-	Mode: light/dark is automatically determined by system color scheme.
-	There is no mode toggle.
-*/
-
-/* ------ THEMING - Light Mode ------ */
-:root {
-	--palette-primary: #4f46e5;
-
-	--text: #1e293b;
-	--text-muted: #64748b;
-	--text-heading: #0f172a;
-	--text-link: #2563eb;
-
-	--code-background: #f6f7f9;
-	--code-text: #47546b;
-	--code-border: #e2e8f0;
-
-	--border: #e2e8f0;
-	--background: #ffffff;
-}
-
-/* ------ THEMING - Dark Mode ------ */
-@media (prefers-color-scheme: dark) {
-	:root {
-		--palette-primary: #20bdff;
-
-		--text: #d2d3d7;
-		--text: #d4d4d8;
-		--text-muted: #d2d3d7;
-		--text-heading: #fafafa;
-		--text-link: #20bdff;
-
-		--code-text: #cbd5e0;
-		--code-background: #1f2631;
-		--code-border: #2d3748;
-
-		--border: #2d3748;
-		--background: #18181b;
-	}
-
-	html {
-		color-scheme: dark;
-	}
-}
 
 /* ------ GLOBAL STYLES - START ------ */
 
@@ -51,12 +5,38 @@
 	font-family: Verdana, sans-serif;
 	line-height: 1.75;
 	scroll-behavior: smooth;
-}
+	--palette-primary: #20bdff;
+	--text: #d2d3d7;
+	--text: #d4d4d8;
+	--text-muted: #d2d3d7;
+	--text-heading: #fafafa;
+	--text-link: #20bdff;
 
+	--code-text: #cbd5e0;
+	--code-background: #1f2631;
+	--code-border: #2d3748;
+	--border: #2d3748;
+	--background: #18181b;
+}
+/* html::before {
+	content: ' ';
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.6;
+	background-image: url('/public/images/background.png');
+	background-repeat: repeat;
+	background-position: 50% 0;
+	background-size: cover;
+} */
 body {
 	color: var(--text);
 	background: var(--background);
 	padding: 0 2rem;
+	position: relative;
 	margin: auto;
 	max-width: 70ch;
 	text-align: left;
