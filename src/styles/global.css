@@ -23,7 +23,7 @@ body {
 	color: var(--text);
 	background: var(--background);
 	background-color: var(--background);
-	background-image: url('/public/images/mask-group.png');
+	background-image: url('/images/mask-group.png');
 	background-repeat: no-repeat;
 	background-position: 0;
 	background-size: cover;
