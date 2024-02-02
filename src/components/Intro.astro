@@ -3,7 +3,7 @@ import Heading from "./ui/Heading.astro";
 ---
 
 <section class="wrapper">
-  <div>
+  <div class="intro">
     <Heading
       as="h1"
       class="name gradient-text gradient-color outline outline-color"
@@ -22,14 +22,13 @@ import Heading from "./ui/Heading.astro";
   .wrapper {
     display: flex;
     padding-top: 1rem;
-    /* padding-bottom: 1rem; */
   }
-
   .headshot {
     display: inline-block;
     border-radius: 50%;
-    width: 125px;
-    height: 125px;
+    max-width: 125px;
+    max-height: 125px;
+    object-fit: contain;
   }
   .outline {
     -webkit-text-fill-color: transparent;
@@ -88,6 +87,18 @@ import Heading from "./ui/Heading.astro";
       letter-spacing: -0.51px;
       line-height: 2rem;
       margin-top: 0.5rem;
+    }
+  }
+  @media (max-width: 640px) {
+    .wrapper {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .intro {
+      order: 2;
+    }
+    .headshot {
+      order: 1;
     }
   }
 </style>
