@@ -1,12 +1,12 @@
 ---
 external: false
-title: "The importance of a Brag Doc"
-previewImage: /images/brag-doc.png
-description: "We should be tracking and documenting our wins throughout our careers. It will pay dividends in the long run."
+title: "All About Me"
+previewImage: /images/all-about-me.png
+description: "As a manager with directs, it's a good idea to keep this as a running document."
 date: 2024-02-01
 ---
 
-![Brag Doc](/images/brag-doc.png)
+![All About Me](/images/all-about-me.png)
 
 A standalone single paragraph of text.
 

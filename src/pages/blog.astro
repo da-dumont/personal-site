@@ -34,27 +34,16 @@ const sortedPosts = posts
             day: "numeric",
           });
           return (
-            <li class="post">
-              <div class="title">
-                {post.frontmatter.external ? (
-                  <a href={post.frontmatter.url} target="_blank">
-                    <span>{post.frontmatter.title}</span>
-                    <ExternalLinkIcon
-                      class="icon-realign"
-                      title="Link to external post"
-                      height={16}
-                      width={16}
-                    />
-                  </a>
-                ) : (
-                  <a href={`/blog/${post.slug}`}>{post.frontmatter.title}</a>
-                )}
-              </div>
-              <div class="publish-date">
-                <time datetime={post.frontmatter.date.toISOString()}>
+            <li class="post title">
+              <a class="block" href={`/blog/${post.slug}`}>
+                <div>
+                  <h3>{post.frontmatter.title}</h3>
+                  <time datetime={post.frontmatter.date.toISOString()} class="publish-date">
                   {formattedDate}
-                </time>
-              </div>
+                  </time>
+                </div>
+                <div class="image-container"><img src={`${post.frontmatter.previewImage}`} class="preview-image"/></div>
+              </a>
             </li>
           );
         })
@@ -70,20 +59,33 @@ const sortedPosts = posts
   }
 
   .post {
-    display: grid;
-    grid-template-columns: 1fr;
     line-height: 1.5;
+    margin: 0 0 4rem 0;
+    padding: 0;
   }
 
-  @media (min-width: 640px) {
-    .post {
-      grid-template-columns: 1fr auto;
-    }
+  .post a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .post + .post {
-    padding-top: 0.5rem;
-  }
+.image-container {
+  display: inline-block;
+  max-height: 100px;
+  max-width: 100px;
+}
+.preview-image {
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.post + .post {
+  padding-top: 0.5rem;
+}
+.post h3 {
+  margin: 0;
+}
 
   .title a {
     color: var(--text);
