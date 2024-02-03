@@ -2,6 +2,7 @@
 import HeaderLink from "./HeaderLink.astro";
 import GitHubIcon from "../components/ui/icons/github.astro";
 import TwitterIcon from "../components/ui/icons/twitter.astro";
+import LinkedInIcon from "../components/ui/icons/linkedin.astro";
 ---
 
 <header>
@@ -11,7 +12,7 @@ import TwitterIcon from "../components/ui/icons/twitter.astro";
       <ul>
         <li><HeaderLink href="/">Home</HeaderLink></li>
         <li><HeaderLink href="/blog">Posts</HeaderLink></li>
-        <li><HeaderLink href="/projects">Bookshelf</HeaderLink></li>
+        <li><HeaderLink href="/projects">Reading</HeaderLink></li>
       </ul>
     </section>
   </nav>
@@ -21,14 +22,21 @@ import TwitterIcon from "../components/ui/icons/twitter.astro";
       href="https://github.com/da-dumont"
       aria-label="Dan on GitHub"
     >
-      <GitHubIcon title="GitHub" />
+      <GitHubIcon title="Dan on GitHub" />
     </a>
     <a
       class="centered"
       href="https://twitter.com/EngLeader_"
       aria-label="Dan on Twitter"
     >
-      <TwitterIcon title="Twitter" />
+      <TwitterIcon title="Dan on Twitter" />
+    </a>
+    <a
+      class="centered"
+      href="https://linkedin.com/in/danieldumont"
+      aria-label="Dan on LinkedIn"
+    >
+      <LinkedInIcon title="Dan on LinkedIn" />
     </a>
   </div>
 </header>
