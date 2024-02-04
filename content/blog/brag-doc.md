@@ -3,15 +3,55 @@ external: false
 title: "The importance of a Brag Doc"
 previewImage: /images/brag-doc.png
 description: "We should be tracking and documenting our wins throughout our careers. It will pay dividends in the long run."
-date: 2024-02-01
+date: 2024-02-04
 ---
 
 ![Brag Doc](/images/brag-doc.png)
 
-A standalone single paragraph of text.
+A topic that comes up often in 1 on 1's with my direct reports is the notion of them keeping a living, breathing document with all of their accomplishments. In the industry, some refer to this as a brag document.
 
-Paragraphs can be multiline too when they constitute words that make up more than one line, i.e they wrap to the next line. Wow! I am really smart to write two lines of text that makes zero sense.
+## What type of value does a brag document provide?
 
-## Blockquotes
+There are numerous advantages to documenting daily accomplishments. 
 
-> It's easy to lose track of the sheer amount of work and accomplishments you've made over the years
+> Primarily, it's easy to overlook the multitude of achievements that transpire in our routine work life, and this holds true for your manager as well.
+
+These accomplishments can be diverse, from delivering a significant roadmap item to enhancing onboarding documentation for your team and project.
+
+Moreover, maintaining a record of these achievements can prove instrumental during quarterly conversations, goal-setting discussions, and annual performance reviews. It serves as a powerful resource for professional development in dialogues with your manager.
+
+> A brag document is a great resume builder.
+
+When it comes to refreshing your resume, it's crucial not to overlook the significant accomplishments you wish to emphasize. Utilizing your brag document as a reference ensures that all necessary details are included.
+
+A comprehensive brag document can serve as the foundation for an engaging narrative about your professional journey.
+
+Additionally, a meticulously compiled brag document can assist both you and your manager in identifying potential areas of improvement, whether technical or interpersonal. These identified areas could then be pursued as future objectives for enhancement.
+
+## Sweat the small stuff
+
+I can't stress this enough, but you need to include the small stuff. Some examples off the top of my head could be:
+
+- Increased code coverage of a particular system
+
+- Made small improvements to the CI/CD pipeline improving the developer experience for everybody
+
+- Led my team through process improvements by providing valuable feedback in retro ceremonies
+
+## Tie it to a metric where applicable
+
+If you're an individual contributor where applicable provide data behind the accomplishment. For example:
+
+> _Spent two sprints adding automated Playwright tests to several edge cases of a feature. This brought automation coverage to 80% and resulted in a decrease in bugs at a 50% clip_
+
+Or, if you're a manager or leader
+
+## How do I get started?
+
+There's absolutely no hard and fast rule to begin documenting your achievements. The key is to simply start! Utilize resources like links, images, charts and so forth to showcase your hard work. Don't hesitate to share with me what you've created - I can't wait to see it!
+
+Here's to celebrating your successes with pride and joy!
+
+Happy bragging!
+
+Dan

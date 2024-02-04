@@ -1,12 +1,12 @@
 ---
 external: false
-title: "All About Me"
+title: "Working with me document"
 previewImage: /images/all-about-me.png
-description: "As a manager with directs, it's a good idea to keep this as a running document."
+description: "As a manager with directs, it's a good idea to keep a working with me document."
 date: 2024-02-01
 ---
 
-![All About Me](/images/all-about-me.png)
+![Working with me](/images/all-about-me.png)
 
 A standalone single paragraph of text.
 
