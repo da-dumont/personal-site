@@ -27,6 +27,6 @@ if (isBuild) {
 }
 export default defineConfig({
   server: { port: SERVER_PORT },
-  site: BASE_URL,
+  site: 'https://ddumont.dev',
   integrations: [sitemap()],
 });
