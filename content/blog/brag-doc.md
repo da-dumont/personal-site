@@ -44,7 +44,8 @@ If you're an individual contributor where applicable provide data behind the acc
 
 > _Spent two sprints adding automated Playwright tests to several edge cases of a feature. This brought automation coverage to 80% and resulted in a decrease in bugs at a 50% clip_
 
-Or, if you're a manager or leader
+Or, if you're a manager or leader:
+> _Drove development team lead time down by 25% from Q1 to Q2_
 
 ## How do I get started?
 

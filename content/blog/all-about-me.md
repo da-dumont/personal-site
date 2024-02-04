@@ -1,5 +1,6 @@
 ---
 external: false
+draft: true
 title: "Working with me document"
 previewImage: /images/all-about-me.png
 description: "As a manager with directs, it's a good idea to keep a working with me document."
