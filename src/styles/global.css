@@ -6,8 +6,8 @@
 	line-height: 1.75;
 	scroll-behavior: smooth;
 	--palette-primary: #20bdff;
-	--text: #d2d3d7;
-	--text: #d4d4d8;
+	--text: #ffffff;
+	--text: #ffffff;
 	--text-muted: #d2d3d7;
 	--text-heading: #fafafa;
 	--text-link: #20bdff;
@@ -23,7 +23,7 @@ body {
 	color: var(--text);
 	background: var(--background);
 	background-color: var(--background);
-	background-image: url('/images/mask-group.png');
+	background-image: url('/images/background.jpg');
 	background-repeat: no-repeat;
 	background-position: 0;
 	background-size: cover;
