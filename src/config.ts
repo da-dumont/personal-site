@@ -3,7 +3,7 @@
 
 export const SITE_TITLE = "Dan Dumont | Engineering leader";
 export const SITE_DESCRIPTION =
-  "Thanks for taking the time to visit my online home! I hope to share some insights based on my 15+ years in the software industry.";
+  "Sharing software development insights based on 15+ years in the industry.";
 export const TWITTER_HANDLE = "@EngLeader_";
 export const MY_NAME = "Dan Dumont";
 
