@@ -1,5 +1,6 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 import { defineConfig } from "astro/config";
+import react from '@astrojs/react';
 import sitemap from "@astrojs/sitemap";
 
 /* 
@@ -28,5 +29,5 @@ if (isBuild) {
 export default defineConfig({
   server: { port: SERVER_PORT },
   site: 'https://ddumont.dev',
-  integrations: [sitemap()],
+  integrations: [react(), sitemap()],
 });
