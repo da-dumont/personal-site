@@ -2,16 +2,12 @@
 /* ------ GLOBAL STYLES - START ------ */
 
 :root {
-	font-family: Verdana, sans-serif;
-	line-height: 1.75;
-	scroll-behavior: smooth;
 	--palette-primary: #20bdff;
 	--text: #ffffff;
 	--text: #d4d4d8;
 	--text-muted: #d2d3d7;
 	--text-heading: #fafafa;
 	--text-link: #20bdff;
-
 	--code-text: #cbd5e0;
 	--code-background: #1f2631;
 	--code-border: #2d3748;
@@ -19,7 +15,7 @@
 	--background: #18181b;
 }
 
-body {
+  body {
 	color: var(--text);
 	background: var(--background);
 	background-color: var(--background);
@@ -34,6 +30,11 @@ body {
 	text-align: left;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+	font-size: 18px;
+  	line-height: 1.75rem;
 }
 
 strong,

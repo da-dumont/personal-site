@@ -21,9 +21,12 @@ const sortedProjects = projects
 ---
 
 <PageLayout>
-  <PageMeta title={`Projects | ${SITE_TITLE}`} slot="meta" />
+  <PageMeta title={`Recommended Readings | ${SITE_TITLE}`} slot="meta" />
   <section slot="main">
-    <ul>
+    <div id="gr_grid_widget_1708135147">
+
+    </div>
+    <!-- <ul>
       {
         sortedProjects.map((project) => {
           const formattedDate = new Date(
@@ -55,9 +58,20 @@ const sortedProjects = projects
           );
         })
       }
-    </ul>
+    </ul> -->
   </section>
 </PageLayout>
+<script src="https://www.goodreads.com/review/grid_widget/160449458.Recommended%20readings%20from%20Goodreads?cover_size=medium&hide_link=&hide_title=&num_books=20&order=a&shelf=read&sort=date_added&widget_id=1708135147" type="text/javascript" charset="utf-8"></script>
+<style type="text/css" media="screen">
+  .gr_grid_container {
+    /* customize grid container div here. eg: width: 500px; */
+  }
+
+  .gr_grid_book_container {
+    /* customize book cover container div here */
+
+  }
+</style>
 
 <style>
   ul {
