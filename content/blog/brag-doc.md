@@ -1,12 +1,12 @@
 ---
 external: false
 title: "Why you should be keeping a brag doc"
-previewImage: /images/brag-doc.png
+previewImage: /images/brag-doc.avif
 description: "We should be tracking and documenting our wins throughout our careers. It will pay dividends in the long run."
 date: 2024-02-04
 ---
 
-{% previewimage src="https://ddumont.dev/images/brag-doc.png" alt="Thumbs up for finishing your brag doc!" /%}
+{% previewimage src="https://ddumont.dev/images/brag-doc.avif" alt="Thumbs up for finishing your brag doc!" /%}
 
 A topic that comes up often in 1 on 1's with my direct reports is the notion of them keeping a living, breathing document with all of their accomplishments. In the industry, some refer to this as a brag document.
 
