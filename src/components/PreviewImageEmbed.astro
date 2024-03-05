@@ -1,0 +1,22 @@
+---
+type Props = {
+  src: string;
+  alt: string;
+};
+
+const { src, alt } = Astro.props;
+---
+
+<!-- 
+    Even though minimal theme is built with zero javascript,
+    if your blog post uses embed elements, the iframe will need to 
+    be setup with javascript. It can't be done without javascript.
+-->
+<figure style="display:flex;max-width:300px;flex-flow:column nowrap;position:relative;margin:0">
+  <img 
+    transition:name="preview-image"
+    src={src}
+    alt={alt}
+    style="max-width:100%"
+  >
+</figure>

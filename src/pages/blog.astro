@@ -42,7 +42,7 @@ const sortedPosts = posts
                   {formattedDate}
                   </time>
                 </div>
-                <div class="image-container"><img src={`${post.frontmatter.previewImage}`} class="preview-image"/></div>
+                <div class="image-container"><img src={`${post.frontmatter.previewImage}`} class="preview-image" transition:name="preview-image"/></div>
               </a>
             </li>
           );

@@ -98,6 +98,14 @@ export const config: Config = {
       },
       selfClosing: true,
     },
+    previewimage: {
+      render: "PreviewImageEmbed",
+      attributes: {
+        src: { type: String, required: true },
+        alt: { type: String, required: true },
+      },
+      selfClosing: true,
+    },
   },
   nodes: {
     heading: {
