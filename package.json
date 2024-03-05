@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@astrojs/prism": "^1.0.2",
-    "@astrojs/react": "^3.0.10",
     "@astrojs/rss": "^2.0.0",
     "@astrojs/sitemap": "^1.0.0",
     "@markdoc/markdoc": "^0.2.1",
