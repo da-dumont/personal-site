@@ -41,7 +41,7 @@ const sortedPosts = posts
                   {formattedDate}
                   </time>
                 </div>
-                <div class="image-container"><img src={`${post.frontmatter.previewImage}`} class="preview-image" transition:name="preview-image"/></div>
+                <div class="image-container"><img src={`${post.frontmatter.previewImage}`} class="preview-image preview-image-book" transition:name="preview-image"/></div>
               </a>
             </li>
           );
@@ -77,6 +77,9 @@ const sortedPosts = posts
 .preview-image {
   border-radius: 50%;
   object-fit: contain;
+}
+.preview-image-book {
+  border-radius: 0;
 }
 
 .post + .post {
