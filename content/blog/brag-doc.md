@@ -6,7 +6,7 @@ description: "We should be tracking and documenting our wins throughout our care
 date: 2024-02-04
 ---
 
-{% previewimage src="https://ddumont.dev/images/brag-doc.avif" alt="Thumbs up for finishing your brag doc!" /%}
+{% previewimage src="/images/brag-doc.avif" alt="Thumbs up for finishing your brag doc!" /%}
 
 A topic that comes up often in 1 on 1's with my direct reports is the notion of them keeping a living, breathing document with all of their accomplishments. In the industry, some refer to this as a brag document.
 
