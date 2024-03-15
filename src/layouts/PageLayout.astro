@@ -37,20 +37,5 @@ import Favicon from "./Favicon.astro";
       <slot name="main" />
     </main>
     <Footer />
-    <style>
-      body {
-        display: grid;
-        min-height: 100vh;
-        grid-template-areas:
-          "header"
-          "main"
-          "footer";
-        grid-template-rows: 5rem minmax(0, 1fr) 5rem;
-        grid-template-columns: minmax(0, 1fr);
-      }
-      main {
-        grid-area: main;
-      }
-    </style>
   </body>
 </html>
