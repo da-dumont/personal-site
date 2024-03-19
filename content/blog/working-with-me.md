@@ -10,7 +10,7 @@ date: 2024-03-16
 
 ## Welcome, and thanks for stopping by!
 
-Welcome and thank you for visiting this page. If you are reading this, you are likely a member of my immediate team or work with me. I have created this document to share my management style, philosophies, and expectations. I firmly believe that a company's success is built upon the relationships among its employees. I hope to establish a successful working relationship with you at LinkSquares.
+Welcome and thank you for visiting this page. If you are reading this, you are likely a member of my immediate team or work with me. I have created this document to share my management style, philosophies, and expectations. I firmly believe that a company's success is built upon the relationships among its employees. I hope to establish a successful working relationship with you at $Company.
 This is a living document that may evolve over time.
 
 ### A brief introduction about myself
