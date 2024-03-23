@@ -5,6 +5,8 @@ type Props = {
 };
 
 const { src, alt } = Astro.props;
+
+const { slug } = Astro.params;
 ---
 
 <!-- 
@@ -14,7 +16,7 @@ const { src, alt } = Astro.props;
 -->
 <figure style="display:flex;max-width:300px;flex-flow:column nowrap;position:relative;margin:0">
   <img 
-    transition:name="preview-image"
+    transition:name=`media-image-${slug}`
     src={src}
     alt={alt}
     style="max-width:100%"

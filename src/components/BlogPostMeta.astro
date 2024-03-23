@@ -43,10 +43,12 @@ const { meta, og, twitter } = getBlogPostMeta({
   siteOwnerTwitterHandle: TWITTER_HANDLE,
   contentAuthorTwitterHandle: TWITTER_HANDLE,
 });
+import { ViewTransitions } from 'astro:transitions';
 ---
 
 <!-- Primary Meta Tags -->
 <title>{meta.title}</title>
+<ViewTransitions />
 <meta name="title" content={meta.title} />
 {meta.description && <meta name="description" content={meta.description} />}
 {meta.canonicalUrl && <link rel="canonical" href={meta.canonicalUrl} />}
