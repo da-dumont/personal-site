@@ -5,6 +5,10 @@ import PageLayout from "../layouts/PageLayout.astro";
 import PageMeta from "../components/PageMeta.astro";
 import { SITE_TITLE } from "../config";
 
+type Props = {
+  slug: string;
+};
+
 const { slug } = Astro.params;
 
 const posts = await readAll({
@@ -43,7 +47,7 @@ const sortedPosts = posts
                   {formattedDate}
                   </time>
                 </div>
-                <div class="image-container"><img src={`${post.frontmatter.previewImage}`} class="preview-image preview-image-book" transition:name=`media-image-${slug}` /></div>
+                <div class="image-container"><img src={`${post.frontmatter.previewImage}`} class="preview-image preview-image-book" transition:name={post.slug} /></div>
               </a>
             </li>
           );

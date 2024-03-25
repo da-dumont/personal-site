@@ -1,5 +1,4 @@
 ---
-draft: true
 external: false
 title: "Working with me"
 previewImage: /images/working-with-me.avif
@@ -19,25 +18,26 @@ I live in MA with my wife, two sons, and two red labrador retrievers. I come fro
 
 ### My role and responsibilities
 As an engineering leader, my responsibilities include:
-- Delivering business value and impact that align with the vision of LinkSquares
+- Delivering business value and impact that align with the vision of $Company
 - Creating a safe, collaborative, trusting, and engaging work environment
 - Ensuring my teams operate at their highest potential and adopt a growth mindset
 - Ensuring that my teams are learning, feeling challenged, and delivering high-value, quality software
 - Lead with context, not control. I don’t tell teams what to do, instead hand them business objectives
 - Work with you individually on your career goals and providing you with opportunities for professional development
-- Ensuring my teams are happy with their work, and ensuring my teams have a significant impact on the growth of LinkSquares.
+- Ensuring my teams are happy with their work, and ensuring my teams have a significant impact on the growth of $Company.
 
 ### Logistics
 I am usually available and working between 9:00 am-5:00 pm EST. If anything comes up during the day, or if I have an appointment, I will notify the team. I try to step away from the computer during lunchtime for 45-60 minutes for fresh air or a mental break. I have three 90-minute blocks of "focus time" throughout the week to focus on to-do's.
 
 By default, I use "speedy meetings" in Google Calendar. This allows me a few minutes to take notes, context-switch, or grab a drink between meetings. You can Slack me 24 hours a day. It's my preferred work communication medium, and I like to respond quickly. If you cannot reach me through Slack, and it's an urgent issue, please call me at #.
 
-I value your time and will work to shield you from distractions. I believe in timely feedback and will likely send a Slack DM, huddle, or Zoom call if I have feedback for you. I would rather not wait for 1:1s or review season. I will praise you publicly if you are comfortable with that and offer you constructive criticism in private.
 
 ### Values
 Ownership and accountability are important to me. I encourage you to ask questions, work with your peers and PM, work with QA to understand how the team will test your work, update your stakeholders regularly, and always put our customers first. If you find an undocumented feature or area of the code, please add a page in Confluence, leave a comment in the code, or share your knowledge and record it in a lightning talk. Leaving it better for the next person will allow this team to grow and get up to speed faster.
 
-I believe in feeling happy, engaged, and challenged in your work environment. We must be supportive and trust one another as a team. This comes back to relationship building. It's important to be open, candid, and communicate with each other. It's important to offer constructive feedback. It's important to be in constant pursuit of mastering your craft. We have one of the best jobs in the world in software. 
+I value your time and will work to shield you from distractions. I believe in timely feedback and will likely send a Slack DM, huddle, or Zoom call if I have feedback for you. I would rather not wait for 1:1s or review season. I will praise you publicly if you are comfortable with that and offer you constructive criticism in private.
+
+I believe in feeling happy, engaged, and challenged in your work environment. We must be supportive and trust one another as a team. This comes back to relationship building. It's important to be open, candid, and communicate with each other. It's important to offer constructive feedback. It's important to be in constant pursuit of mastering your craft. We have one of the best jobs in the world in software.
 
 Let's make the best of it by celebrating team wins, sharing life events, cracking a joke, etc. Try to get to know your teammates on a personal level and build lasting relationships!
 
