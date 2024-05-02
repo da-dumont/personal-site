@@ -12,7 +12,7 @@ type Props = {
 const { slug } = Astro.params;
 
 const posts = await readAll({
-  directory: "books",
+  directory: "reading",
   frontmatterSchema: blog,
 });
 
@@ -40,7 +40,7 @@ const sortedPosts = posts
           });
           return (
             <li class="post title">
-              <a class="block" href={`/books/${post.slug}`}>
+              <a class="block" href={`/reading/${post.slug}`}>
                 <div>
                   <h3>{post.frontmatter.title}</h3>
                   <time datetime={post.frontmatter.date.toISOString()} class="publish-date">
