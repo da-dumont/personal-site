@@ -4,7 +4,6 @@
 :root {
 	--palette-primary: #20bdff;
 	--text: #ffffff;
-	--text: #d4d4d8;
 	--text-muted: #d2d3d7;
 	--text-heading: #fafafa;
 	--text-link: #20bdff;
@@ -17,25 +16,16 @@
 
   body {
 	color: var(--text);
-	background: var(--background);
-	background-color: var(--background);
-	background-image: url('/images/background.avif');
-	background-repeat: no-repeat;
-	background-position: 0;
-	background-size: cover;
+	background: var(--background) url('/images/background.avif') top center no-repeat;
+	background-size: 100vw;
 	padding: 0 2rem;
-	position: relative;
 	margin: auto;
 	max-width: 70ch;
 	text-align: left;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
 	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizeLegibility;
 	font-family: "Roboto", sans-serif;
 	font-optical-sizing: auto;
-	font-variation-settings: "wdth" 100;
-	font-size: 18px;
+	font-size: 1.15rem;
   	line-height: 1.75rem;
 }
 

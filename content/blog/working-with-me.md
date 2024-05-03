@@ -5,6 +5,9 @@ previewImage: /images/working-with-me.avif
 description: "How I like to work"
 date: 2024-03-16
 ---
+_The following is the same document I send to folks that I work with for them to get to know a little bit about me, my working style, and what I value most._
+
+_If you don't have your own then now is the perfect time to write one!_
 
 {% previewimage src="/images/working-with-me.avif" alt="This is what you can expect working with me" /%}
 
