@@ -39,7 +39,7 @@ If you're a leader, whether you manage people or not, if you've empowered others
 
 I work with talented and smart people&mdash;way smarter than I'll ever be. I fully trust that our team will continue to deliver and innovate for the business and our customer base, whether I am around or not.
 
-At the end of the day, take your time off and have no regrets about it. Being with our two boys and experiencing being parents for the first weeks of their lives is magical and time we will never forget. We know not everybody has it as good as us in terms of flexibility. For that, we're thankful and appreciative.
+At the end of the day, take your time off and have no regrets about it. Being with our two boys and experiencing being parents for the first weeks of their lives is magical and a time we will never forget. We are filled with gratitude and appreciation to our employers and the flexibility for that time off.
 
 
 
