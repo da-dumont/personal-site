@@ -31,7 +31,7 @@ Candidly, I was a bit nervous when my wife and I had our first child, knowing I 
 
 - Will people just forget about me? Out of sight, out of mind!
 - Will I miss something important that would warrant my attention?
-- Will I lose my job?
+- Who will take care of _[insert random task]_? (P.S. you should take care of this via a coverage document)?
 
 At the time, the feelings were real. I couldn't have been more wrong.
 
@@ -40,8 +40,6 @@ If you're a leader, whether you manage people or not, if you've empowered others
 I work with talented and smart people&mdash;way smarter than I'll ever be. I fully trust that our team will continue to deliver and innovate for the business and our customer base, whether I am around or not.
 
 At the end of the day, take your time off and have no regrets about it. Being with our two boys and experiencing being parents for the first weeks of their lives is magical and time we will never forget. We know not everybody has it as good as us in terms of flexibility. For that, we're thankful and appreciative.
-
-So if you do have the time, take it and enjoy it!
 
 
 
