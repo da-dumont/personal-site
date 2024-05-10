@@ -22,6 +22,8 @@ There have been studies showing that some big innovations happen after people co
 
 "Time off provides mental bandwidth that allows you to think creatively and see your work in a different light," Reed Hastings explained. "If you are working all the time, you don't have the perspective to see your problem with fresh eyes."
 
+**Take time off to refresh your mind. Unplug from work. It's not healthy to always have your "On" switch up.**
+
 ### On a personal front...
 This is my second time on parental leave. I'm fortunate to work for a company that offers a generous leave of 14 weeks for both parents.
 
