@@ -25,7 +25,7 @@ There have been studies showing that some big innovations happen after people co
 **Take time off to refresh your mind. Unplug from work. It's not healthy to always have your "On" switch up.**
 
 ### On a personal front...
-This is my second time on parental leave. I'm fortunate to work for a company that offers a generous leave of 14 weeks for both parents.
+This is my second time on parental leave. I'm fortunate to work for a company that offers a generous leave for both parents.
 
 Candidly, I was a bit nervous when my wife and I had our first child, knowing I would be away from my role for the most amount of time in my career at once. It sounds silly, but I had wacky thoughts going through my head:
 
@@ -39,7 +39,7 @@ If you're a leader, whether you manage people or not, if you've empowered others
 
 I work with talented and smart people&mdash;way smarter than I'll ever be. I fully trust that our team will continue to deliver and innovate for the business and our customer base, whether I am around or not.
 
-At the end of the day, take your time off and have no regrets about it. Being with our two boys and experiencing being parents for the first 14 weeks of their lives is time well spent and time we will never forget. We know not everybody has it as good as us in terms of flexibility. For that, we're thankful and appreciative.
+At the end of the day, take your time off and have no regrets about it. Being with our two boys and experiencing being parents for the first weeks of their lives is magical and time we will never forget. We know not everybody has it as good as us in terms of flexibility. For that, we're thankful and appreciative.
 
 So if you do have the time, take it and enjoy it!
 
