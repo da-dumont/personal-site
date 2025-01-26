@@ -8,50 +8,49 @@ date: 2024-02-04
 
 {% previewimage src="/images/brag-doc.avif" alt="Thumbs up for finishing your brag doc!" /%}
 
-A topic that often comes up in one-on-ones with my direct reports is the notion of them keeping a living, breathing document with all of their accomplishments. In the industry, some refer to this as a brag document.
+A common topic arising during one-on-ones with my direct reports is maintaining a living document that details all their accomplishments. Within the industry, this is often referred to as a brag document.
 
-## What type of value does a brag document provide?
+## What Value Does a Brag Document Provide?
 
-There are numerous advantages to documenting daily accomplishments. 
+There are numerous advantages to documenting your daily achievements:
 
-> Primarily, it's easy to overlook the many achievements that happen in our routine work life, and this also holds true for your manager.
+> Primarily, it’s easy to overlook many of the accomplishments in our daily work life, and your manager might miss them too.
 
-These accomplishments can be diverse, from delivering a significant roadmap item to enhancing onboarding documentation for your team and project.
+These accomplishments can vary widely, from delivering a significant roadmap item to improving the onboarding documentation for your team or project.
 
-Moreover, maintaining a record of these achievements can prove instrumental during quarterly conversations, goal-setting discussions, and annual performance reviews. It is a powerful resource for professional development in dialogues with your manager.
+Additionally, recording these achievements can be invaluable during quarterly conversations, goal-setting discussions, and annual performance reviews. It serves as a powerful resource for your professional development in discussions with your manager.
 
-> A brag document is a great resume builder.
+> A brag document is an excellent resume builder.
 
-When refreshing your resume, it's important not to overlook the accomplishments you've made thus far in your career. Utilizing your brag document as a reference ensures all those details are included.
+When updating your resume, you must not overlook the accomplishments you've achieved throughout your career. Using your brag document as a reference ensures you include all relevant details.
 
-A comprehensive brag document can be the foundation for an engaging narrative about your professional journey. It can assist you and your manager in identifying potential areas of improvement, whether technical or interpersonal. These identified areas could then be pursued as future objectives or goals for your professional growth.
+A comprehensive brag document can form the basis of an engaging narrative about your professional journey. It can also help you and your manager identify areas for improvement, whether technical or soft skills abilities. These areas can then be pursued as future objectives or goals for your professional growth.
 
-## Sweat the small stuff
+## Don’t Forget the Small Wins
 
-I can't stress this enough, but you must include the small stuff. Some examples off the top of my head could be:
+I cannot emphasize this enough: include the small wins! Some examples might include:
 
-- Increased code coverage of a particular system
+- Increasing code coverage for a specific system
+- Making minor improvements to the CI/CD pipeline, enhancing the developer experience for everyone
+- Leading my team through process improvements by providing valuable feedback during retrospective ceremonies
 
-- Made small improvements to the CI/CD pipeline, improving the developer experience for everybody
+These small achievements can accumulate, significantly increasing your overall organizational impact.
 
-- Led my team through process improvements by providing valuable feedback in retro ceremonies
+## Tie It to Metrics When Applicable
 
-These small wins can compound and increase your overall impact throughout the organization.
+If you’re an individual contributor, provide data to support your accomplishments when possible. For example:
 
-## Tie it to a metric where applicable
+> _Spent two sprints adding automated Playwright tests to several edge cases of a feature, which increased automation coverage to 80% and reduced bugs by 50%._
 
-If you're an individual contributor, provide data behind the accomplishment where applicable. For example:
+If you’re a manager or leader, for instance:
 
-> _Spent two sprints adding automated Playwright tests to several edge cases of a feature. This brought automation coverage to 80% and decreased bugs at a 50% rate._
+> _Reduced development team lead time by 25% from Q1 to Q2 by properly addressing requirements and acceptance criteria for feature X._
 
-Or, if you're a manager or leader:
-> _Drove development team lead time down by 25% from Q1 to Q2 by properly addressing requirements and acceptance criteria of X feature_
+## How Do I Get Started?
 
-## How do I get started?
+There are no strict rules for documenting your achievements. The most important thing is simply to start! Use resources like links, images, charts, and so on to showcase your hard work. Don’t hesitate to share what you’ve created—I’m excited to see it!
 
-There's absolutely no hard and fast rule for documenting your achievements. The key is to simply start! Utilize resources like links, images, charts, and so forth to showcase your hard work. Don't hesitate to share with me what you've created—I can't wait to see it!
-
-Here's to celebrating your successes with pride and joy!
+Here’s to celebrating your successes with pride and joy!
 
 Happy bragging!
 
