@@ -8,6 +8,7 @@ date: 2024-05-02
 
 {% previewimage src="/images/inspired-book.avif" alt="Inspired: How to Create Tech Products Customers Love by Marty Cagan" /%}
 
+
 You know that moment when you pick up a book thinking it's going to be a quick professional development read, and instead it fundamentally changes how you view your role? That's what happened when I dove into Marty Cagan's "Inspired." As an engineering leader, I approached it thinking I'd gain some insight into our product partners' world. Instead, I found myself questioning everything I thought I knew about building successful software products.
 
 Here's a confession: Like many engineering leaders, I used to think I had a pretty good handle on product development. After all, we're the ones who turn ideas into reality, right? But as I turned each page of Cagan's book, I felt a mix of enlightenment and slight embarrassment. How had I missed so many crucial aspects of what makes products truly successful?
