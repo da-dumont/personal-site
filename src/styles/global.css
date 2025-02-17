@@ -16,7 +16,7 @@
 
   body {
 	color: var(--text);
-	background: var(--background) url('/images/background.avif') top center no-repeat;
+	background: linear-gradient(rgba(24, 24, 27, 0.4), rgba(24, 24, 27, 0.6)  ),url('/images/background.avif') top center no-repeat;
 	background-size: cover;
 	padding: 0 2rem;
 	margin: auto;
