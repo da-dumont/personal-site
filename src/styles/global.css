@@ -20,13 +20,13 @@
 	background-size: cover;
 	padding: 0 2rem;
 	margin: auto;
-	max-width: 70ch;
+	max-width: 60ch;
 	text-align: left;
 	-webkit-font-smoothing: antialiased;
-	font-family: "EB Garamond", serif;
+	font-family: "Montserrat", serif;
   	font-optical-sizing: auto;
   	font-weight: 500;
-	font-size: 21px;
+	font-size: 18px;
   	line-height: 1.75rem;
 }
 
