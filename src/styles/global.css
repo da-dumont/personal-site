@@ -20,14 +20,14 @@
 	background-size: cover;
 	padding: 0 2rem;
 	margin: auto;
-	max-width: 60ch;
+	max-width: 70ch;
 	text-align: left;
 	-webkit-font-smoothing: antialiased;
-	font-family: "Montserrat", serif;
+	font-family: "Barlow", sans-serif;
   	font-optical-sizing: auto;
-  	font-weight: 500;
-	font-size: 18px;
-  	line-height: 1.75rem;
+  	font-weight: 400;
+	font-size: 16px;
+  	line-height: 1.65rem;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -111,12 +111,13 @@ pre>code {
 
 blockquote:not(.unset) {
 	font-size: 1.125rem;
+	font-family: "Barlow", sans-serif;
 	width: 85%;
 	margin: 0 auto;
 	font-style: italic;
 	color: var(--text);
 	padding: 1.5rem 3rem;
-	line-height: 1.9;
+	line-height: 1.65rem;
 	position: relative;
 }
 
