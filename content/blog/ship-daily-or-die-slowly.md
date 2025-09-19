@@ -1,13 +1,13 @@
 ---
 external: false
 title: "Ship Daily or Die Slowly: Why Process Is Killing Your Engineering Team"
-previewImage: /images/apocalyptic-office.avif
-ogImagePath: /images/apocalyptic-office.avif
+previewImage: /images/apocalyptic-office.png
+ogImagePath: /images/apocalyptic-office.png
 description: "The fastest shipping teams aren't grinding through 80-hour weeks—they removed the friction. Learn how elite teams ship faster with better quality by deleting processes, not optimizing them."
 date: 2025-09-18
 ---
 
-{% previewimage src="/images/apocalyptic-office.avif" alt="A stark office environment split between traditional corporate processes and modern agile development, symbolizing the transformation from bureaucratic overhead to streamlined shipping practices." /%}
+{% previewimage src="/images/apocalyptic-office.png" alt="A stark office environment split between traditional corporate processes and modern agile development, symbolizing the transformation from bureaucratic overhead to streamlined shipping practices." /%}
 
 The tech industry in 2025 is different. We all feel it. The days of unlimited budgets and "move fast and break things" have shifted to "deliver value efficiently." Companies are asking harder questions about ROI. Teams are being asked to do more with existing resources.
 
