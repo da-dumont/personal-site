@@ -56,21 +56,15 @@ It's been a while since I've been a hands on IC, but in the past what's worked b
 
 JIRA is just a tool and tools aren't evil. The problem is how we use it.
 
-When was the last time you looked at a JIRA ticket and thought "this really captures what the customer needs"? Too often we see "As a user, I want to click a button so that a modal appears" with story points that spark 30 minute debates.
+User stories are theater. The "As a user, I want..." format is just verbose packaging around what engineers actually need. [Linear gets this](https://linear.app/method/write-issues-not-user-stories). Write issues, not stories. What's broken? Why does it matter? What are the constraints? How do we know we're done?
 
-[Jason Krohn writes about this](https://www.adaptivealchemist.com/the-futile-chase-for-predictability-in-software-development/) in "The Futile Chase for Predictability in Software Development" where he says story points give us the illusion of predictability while missing what matters: throughput. We spend hours estimating complexity instead of measuring how fast we deliver value.
-
-The key is finding the middle ground. Well written tickets with clear context enable AI powered development now. Engineers paste requirements into Claude or Cursor, and with good repository context, they generate implementation plans. Sometimes even one shot PRs to production.
-
-Here's something we discovered: CLI coding + JIRA context behaves like a solid teammate when you hand it an AGENTS.md file for context. Less drift, cleaner diffs, faster PRs. The AI understands your codebase conventions and the problem you're solving, so it generates code that actually fits your patterns instead of generic solutions.
-
-The sweet spot? Tickets that explain the problem clearly without over-specifying the solution. Something like "Customers need to export contracts as PDFs with redlines visible" gives enough context without dictating implementation. You want enough detail for an LLM to understand the goal, but not so much that you've already designed the solution in the ticket.
-
-[37signals and their Shape Up methodology](https://basecamp.com/shapeup) changed how I think about this. [Ryan Singer explained to Lenny Rachitsky](https://www.lennysnewsletter.com/p/shape-up-ryan-singer) that Shape Up works because it gives teams ownership over implementation details while maintaining strategic control through appetite and problem definition. Define what success looks like and how much time we're willing to spend. Then let teams figure out implementation.
+Once we have these tickets, we spend hours estimating them with story points that rarely reflect reality. [Jason Krohn writes about this](https://www.adaptivealchemist.com/the-futile-chase-for-predictability-in-software-development/) in "The Futile Chase for Predictability in Software Development" where he says story points give us the illusion of predictability while missing what matters: **throughput**. We spend hours estimating complexity instead of measuring how fast we deliver value.
 
 I know a team that replaced story points with a simple question: "Can we ship this in 2 weeks?" If not, break it down. If yes, start building. Their velocity doubled in six weeks because they stopped playing estimation theater and started shipping.
 
-Sometimes I wonder if we like the theater because it feels safer than shipping.
+The irony is we're living in an era where AI tools could accelerate everything, but we're not giving them the context they need. Product managers can generate comprehensive PRDs in hours using Claude or GPT. Engineers have Cursor and Copilot ready to consume rich context. But instead of clear problem definitions with success metrics and constraints, we provide these tools with user stories that lack substance.
+
+When product provides actual JIRA context that matters, engineers feed that directly into their AI tools. Suddenly your development assistant understands the problem space. It becomes an architecture partner, not just a code completer. Good tickets enable good AI assistance, while bad tickets waste time.
 
 ## Parallel Work Streams
 
@@ -82,7 +76,7 @@ When you eliminate dependencies, you eliminate delays.
 
 ## Customer Connection Drives Quality
 
-Requirements documents are lies about the future. By the time you build what was specified, the world changed. You know how this goes. Product spends a bunch of time creating the PRD. Engineering spends two weeks poking holes in it. Design spends a couple of weeks creating mocks. You build exactly to spec and ship it. You watch session recordings and realize customers use it completely differently. That feature you debated for hours? They never noticed. That edge case you spent a week handling? Never happens. Never. Not once. But we built it anyway because it was in the requirements.
+Requirements documents are lies about the future. By the time you build what was specified, the world changed. You know how this goes. Product creates a detailed PRD. Engineering pokes holes in it. Design creates mocks. You build exactly to spec. You ship it. You watch session recordings and realize customers use it completely differently. That feature you debated for hours? They never noticed. That edge case you spent a week handling? Never happens. Never. Not once. But we built it anyway because it was in the requirements.
 
 Smart teams flip this model. They work with design partners from day one. Give 10 real customers access to half-finished features. Let them complain about the save button that doesn't work yet. Ship them updates every week and watch what changes they actually care about. [Gong built their entire platform this way](https://www.lennysnewsletter.com/p/how-gong-builds-product), converting 11 of their first 12 design partners into paying customers. Not because the product was perfect. Because it solved real problems they helped identify.
 
