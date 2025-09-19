@@ -28,7 +28,7 @@ We've been taught that moving fast means breaking things. Quality requires slown
 
 I used to believe this, but not anymore.
 
-Remember fixing a bug from three months ago? You state at code and think "Who wrote this garbage?" Then git blame reveals it was you. You wasted an hour just to remember what this service does. Another hour figuring out that weird decision. There was probably a reason but who knows what it was. Half your day gone before you even start the fix.
+Remember fixing a bug from three months ago? You stare at code and think "Who wrote this garbage?" Then git blame reveals it was you. You wasted an hour just to remember what this service does. Another hour figuring out that weird decision. There was probably a reason but who knows what it was. Half your day gone before you even start the fix.
 
 The fastest teams maintain high quality because they ship continuously. No time for bugs to accumulate. No distance between code and customers. They ship excellence because perfection takes too long.
 
