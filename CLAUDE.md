@@ -44,6 +44,123 @@ Add new content by creating `.md` files in the appropriate `content/` subdirecto
 - `{% youtube url="..." label="..." /%}`
 - `{% tweet url="..." /%}`
 - `{% codepen url="..." title="..." /%}`
+- `{% githubgist id="..." /%}`
+- `{% previewimage src="/images/..." alt="..." /%}`
+
+### Unused Dependencies (do not use)
+- `slugify` — listed in `package.json` but not imported anywhere in `src/`
+- `astro-imagetools` — listed in `package.json` but not imported anywhere in `src/`
+
+### Content Schema Reference
+
+All frontmatter is validated by Zod in `src/lib/markdoc/frontmatter.schema.ts`.
+
+```
+# Base fields (all content types)
+title: string           # required
+date: YYYY-MM-DD        # required — no quotes
+draft: boolean          # default false — hides post from all listing pages
+featured: boolean       # default false — NOT currently used in UI
+previewImage: string    # optional — e.g. /images/foo.png — shown in blog listing
+
+# Internal post (external: false)
+external: false         # required literal
+description: string     # optional — used in SEO meta description
+ogImagePath: string     # optional — e.g. /images/foo.png — used as OG/Twitter card image
+canonicalUrl: string    # optional — for content cross-posted from another site
+
+# External post (external: true)
+external: true          # required literal
+url: string             # required — where the link in the blog listing points
+```
+
+External posts appear in the blog listing but do NOT get their own page generated.
+
+### Data Flow
+
+```
+content/*.md
+  → gray-matter              # extracts YAML frontmatter + raw markdown body
+  → Zod validation           # frontmatter.schema.ts — throws at build time on invalid fields
+  → Markdoc.parse()          # parses markdown into AST
+  → Markdoc.transform()      # applies markdoc.config.ts (custom tags/nodes)
+  → RenderableTree (AST)
+  → Renderer.astro           # maps AST node names → Astro components
+  → ContentLayout / PageLayout
+  → HTML
+```
+
+Key helper functions in `src/lib/markdoc/read.ts`:
+- `readAll({ directory, frontmatterSchema })` — reads all `.md` files in a content subdirectory; used by listing pages
+- `readOne({ directory, slug, frontmatterSchema })` — reads one file by slug; used by `[slug].astro` dynamic pages
+
+### Adding a New Markdoc Tag (Two-Step Rule)
+
+**Both files must be updated or the tag will throw a validation error at build time:**
+
+1. `src/lib/markdoc/markdoc.config.ts` — add the tag definition to `config.tags`
+2. `src/components/Renderer.astro` — import the Astro component and register it in the `components` map
+
+See `youtube` / `YouTubeEmbed` as the canonical example of this pattern.
+
+### Component Inventory
+
+**Content rendering:**
+
+| Component | Purpose | Key Props |
+|-----------|---------|-----------|
+| `Renderer.astro` | Maps Markdoc AST → Astro components | `content: Content` |
+| `Heading.astro` | Renders h1–h6 from Markdoc heading node | `level: number` |
+| `CodeBlock.astro` | Syntax-highlighted code (Prism, Coldark Dark) | `content: string`, `language?: string` |
+| `YouTubeEmbed.astro` | YouTube iframe embed | `url: string`, `label: string` |
+| `TweetEmbed.astro` | Twitter embed via widgets.js | `url: string` |
+| `CodePenEmbed.astro` | CodePen iframe embed | `url: string`, `title: string` |
+| `GitHubGistEmbed.astro` | GitHub Gist via srcdoc iframe | `id: string` |
+| `PreviewImageEmbed.astro` | Hero image with view transition (reads slug from `Astro.params`, not props) | `src: string`, `alt: string` |
+
+**SEO / meta:**
+
+| Component | Purpose | Key Props |
+|-----------|---------|-----------|
+| `BlogPostMeta.astro` | `<head>` tags for blog posts (OG, Twitter, canonical) | `title`, `description`, `publishDate`, `pagePath`, `ogImageAbsoluteUrl` |
+| `PageMeta.astro` | `<head>` tags for list pages | `title`, `description` |
+
+**Layout:**
+
+| Component | Purpose | Slots |
+|-----------|---------|-------|
+| `PageLayout.astro` | Shell for list pages (blog, reading, home) | `meta`, `main` |
+| `ContentLayout.astro` | Shell for content pages (posts) — Props: `title: string`, `date: Date` | `meta`, `content` |
+
+**UI:**
+
+| Component | Purpose |
+|-----------|---------|
+| `Header.astro` | Top nav with social icon links |
+| `HeaderLink.astro` | Active-aware nav link (`href: string`) |
+| `Footer.astro` | Copyright footer |
+| `Intro.astro` | Hero section with headshot and bio (home page) |
+| `Favicon.astro` | Favicon and manifest `<link>` tags |
+
+**Icons** (in `src/components/ui/icons/`): `github.astro`, `twitter.astro`, `linkedin.astro`, `external-link.astro`
+
+### Image Conventions
+
+- All images live in `public/images/`
+- Use `.png` format — `.avif` was previously used but has been migrated away from
+- `previewImage` and `ogImagePath` frontmatter values are root-relative (e.g. `/images/foo.png`)
+- In `[slug].astro`, `ogImagePath` is converted to an absolute URL via `new URL(ogImagePath, SITE_URL)`
+
+### RSS Feed
+
+Available at `/rss.xml`, generated by `src/pages/rss.xml.ts`.
+
+### Known Quirks
+
+- **`PreviewImageEmbed.astro`** reads `slug` from `Astro.params` (the route context), not from props. Do not pass `slug` as a prop — it is ignored.
+- **`featured` flag** exists in the Zod schema but is not consumed anywhere in the UI. Setting it has no effect.
+- **`ViewTransitions`** is imported inside `BlogPostMeta.astro` rather than in the layout — intentional for per-page opt-in.
+- **External posts** appear in the blog listing but never have a `[slug].astro` page generated for them (filtered by `!frontmatter.external` in `getStaticPaths`).
 
 ## Typography Overview
 

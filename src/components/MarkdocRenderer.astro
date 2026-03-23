@@ -1,0 +1,76 @@
+---
+import type { RenderableTreeNodes } from "@markdoc/markdoc";
+import Markdoc from "@markdoc/markdoc";
+
+type ComponentEntry = {
+  Component: any;
+  props: Record<string, string | number>;
+};
+
+type Props = {
+  content: RenderableTreeNodes;
+  components?: Record<string, ComponentEntry>;
+};
+
+const { content, components = {} } = Astro.props;
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+type RenderMode = "html" | "self" | "tag" | "empty";
+
+let Tag: any = null;
+let tagProps: Record<string, any> = {};
+let children: any = null;
+let htmlContent = "";
+let renderMode: RenderMode = "empty";
+
+if (Array.isArray(content)) {
+  renderMode = "self";
+} else if (
+  typeof content === "string" ||
+  typeof content === "number" ||
+  content === null ||
+  typeof content !== "object" ||
+  !Markdoc.Tag.isTag(content)
+) {
+  htmlContent =
+    typeof content === "string" || typeof content === "number"
+      ? escapeHtml(String(content))
+      : "";
+  renderMode = "html";
+} else {
+  const { name, attributes, children: nodeChildren = [] } = content;
+  children = nodeChildren;
+
+  if (name && Object.hasOwn(components, name)) {
+    Tag = components[name].Component;
+    tagProps = { ...attributes, ...components[name].props };
+  } else if (name) {
+    Tag = name;
+    tagProps = { ...attributes };
+  }
+
+  if (Tag) renderMode = "tag";
+}
+---
+
+{renderMode === "html" ? (
+  <Fragment set:html={htmlContent}></Fragment>
+) : renderMode === "self" ? (
+  (content as RenderableTreeNodes[]).map((element) => (
+    <Astro.self content={element} components={components} />
+  ))
+) : renderMode === "tag" && Tag ? (
+  <Tag {...tagProps}>
+    {Array.isArray(children) && children.length > 0 ? (
+      <Astro.self content={children} components={components} />
+    ) : null}
+  </Tag>
+) : null}

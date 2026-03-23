@@ -5,12 +5,6 @@ import PageLayout from "../layouts/PageLayout.astro";
 import PageMeta from "../components/PageMeta.astro";
 import { SITE_TITLE } from "../config";
 
-type Props = {
-  slug: string;
-};
-
-const { slug } = Astro.params;
-
 const posts = await readAll({
   directory: "blog",
   frontmatterSchema: blog,
