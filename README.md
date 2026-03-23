@@ -26,11 +26,13 @@ The site features three main content areas:
 
 ## Tech Stack
 
-- **Framework**: [Astro](https://astro.build) for static site generation
+- **Framework**: [Astro 6](https://astro.build) for static site generation
 - **Content**: [Markdoc](https://markdoc.dev) for enhanced markdown authoring
-- **Styling**: Plain CSS with dark/light mode support
+- **Styling**: Plain CSS with custom properties (dark theme)
+- **Fonts**: Barlow (body), Oswald (headings) via Google Fonts
 - **Hosting**: Deployed on Netlify
 - **Language**: TypeScript throughout
+- **Schema Validation**: Zod for frontmatter validation at build time
 
 ## Development
 
@@ -48,17 +50,19 @@ yarn build
 yarn preview
 ```
 
-## Custom Components
+## Custom Markdoc Components
 
-The blog supports custom Markdoc components for rich content:
+The blog supports rich embeds via custom Markdoc tags:
 
-- YouTube video embeds
-- Twitter/X post embeds  
-- CodePen embeds
-- GitHub Gist embeds
-- Preview images
+| Tag | Usage |
+|-----|-------|
+| YouTube | `{% youtube url="..." label="..." /%}` |
+| Twitter/X | `{% tweet url="..." /%}` |
+| CodePen | `{% codepen url="..." title="..." /%}` |
+| GitHub Gist | `{% githubgist id="..." /%}` |
+| Preview image | `{% previewimage src="/images/..." alt="..." /%}` |
 
-See [markdoc.config.ts](src/lib/markdoc/markdoc.config.ts) for component definitions.
+Adding a new embed requires updating both [`markdoc.config.ts`](src/lib/markdoc/markdoc.config.ts) and [`Renderer.astro`](src/components/Renderer.astro).
 
 ## Built With
 
