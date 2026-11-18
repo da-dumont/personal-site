@@ -6,6 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - `yarn dev` or `yarn start` - Start development server on port 3000
 - `yarn build` - Build the site for production
+- `yarn typecheck` - Type-check `.astro` and `.ts` files (`astro check`; not `yarn check`, which is a built-in yarn 1 command)
 - `yarn preview` - Preview the built site locally
 - `yarn clean` - Remove the dist directory
 
@@ -16,27 +17,29 @@ This is an Astro-based personal blog/portfolio site built with TypeScript and Ma
 ### Key Components
 
 - **Content Management**: Uses Markdoc for markdown processing with custom components
-- **Content Structure**: 
-  - `content/blog/` - Blog posts
-  - `content/projects/` - Project showcases  
-  - `content/reading/` - Book reviews/notes
+- **Content Structure**: Astro content collections defined in `src/content.config.ts`
+  - `content/blog/` - Blog posts (`blog` collection, pages at `/blog/<file-name>`)
+  - `content/reading/` - Book reviews/notes (`reading` collection, pages at `/reading/<file-name>`)
+  - `content/blog/extended-markdown-style-guide.md` - Draft test page that uses every custom Markdoc tag; set `draft: false` locally to check embeds render, never publish it
 - **Custom Markdoc Tags**: YouTube embeds, Twitter embeds, CodePen embeds, GitHub Gist embeds, and preview images
 - **Rendering**: Custom renderer at `src/components/Renderer.astro` handles Markdoc output
 
 ### File Structure
 
 - `src/config.ts` - Site configuration (title, description, social handles)
+- `src/content.config.ts` - Content collections and the frontmatter schema
+- `src/lib/posts.ts` - Loading, sorting, date formatting and Markdoc rendering for posts
 - `src/lib/markdoc/markdoc.config.ts` - Markdoc configuration for custom components
+- `src/pages/[collection]/[slug].astro` - One page per post, for both collections
+- `src/components/PostList.astro` - The post list shared by `/blog` and `/reading`
 - `src/components/` - Astro components for UI and custom Markdoc renderers
-- `astro.config.mjs` - Astro configuration with environment-based URL handling
+- `astro.config.mjs` - Astro configuration (site URL, dev port, sitemap)
 - Content authored in markdown files using Markdoc syntax
 
 ### Environment Configuration
 
-The site uses dynamic URL configuration:
-- Development: `http://localhost:3000`  
-- Production: `https://ddumont.dev`
-- URLs automatically switch based on build vs dev mode
+- Dev server: `http://localhost:3000`
+- `site` in `astro.config.mjs` is always `https://ddumont.dev`, so SEO, RSS and sitemap URLs use the live address in dev and build alike (`SITE_URL` in `src/config.ts` reads it)
 
 ### Content Authoring
 
@@ -47,13 +50,9 @@ Add new content by creating `.md` files in the appropriate `content/` subdirecto
 - `{% githubgist id="..." /%}`
 - `{% previewimage src="/images/..." alt="..." /%}`
 
-### Unused Dependencies (do not use)
-- `slugify` — listed in `package.json` but not imported anywhere in `src/`
-- `astro-imagetools` — listed in `package.json` but not imported anywhere in `src/`
-
 ### Content Schema Reference
 
-All frontmatter is validated by Zod in `src/lib/markdoc/frontmatter.schema.ts`.
+All frontmatter is validated by Zod (Astro's bundled `astro/zod`) in `src/content.config.ts`; an invalid field fails the build with the field's message.
 
 ```
 # Base fields (all content types)
@@ -74,14 +73,16 @@ external: true          # required literal
 url: string             # required — where the link in the blog listing points
 ```
 
-External posts appear in the blog listing but do NOT get their own page generated.
+External posts appear in the listing, linking to their `url`, but do NOT get their own page generated.
 
 ### Data Flow
 
 ```
-content/*.md
-  → gray-matter              # extracts YAML frontmatter + raw markdown body
-  → Zod validation           # frontmatter.schema.ts — throws at build time on invalid fields
+content/<collection>/*.md
+  → glob loader              # content.config.ts — Astro reads frontmatter + raw body
+  → Zod validation           # content.config.ts — throws at build time on invalid fields
+  → getPublishedPosts()      # lib/posts.ts — drops drafts, newest first
+  → renderPost()             # lib/posts.ts — Markdoc.parse + validate + transform
   → Markdoc.parse()          # parses markdown into AST
   → Markdoc.transform()      # applies markdoc.config.ts (custom tags/nodes)
   → RenderableTree (AST)
@@ -90,9 +91,12 @@ content/*.md
   → HTML
 ```
 
-Key helper functions in `src/lib/markdoc/read.ts`:
-- `readAll({ directory, frontmatterSchema })` — reads all `.md` files in a content subdirectory; used by listing pages
-- `readOne({ directory, slug, frontmatterSchema })` — reads one file by slug; used by `[slug].astro` dynamic pages
+Key helper functions in `src/lib/posts.ts`:
+- `getPublishedPosts(collection)` — non-draft posts, newest first; used by list pages, `[collection]/[slug].astro` and the RSS feed
+- `renderPost(post)` — Markdoc tree for `Renderer.astro`; only published posts are rendered, so an invalid tag in a draft doesn't fail the build
+- `formatPostDate(date)` — the "Sep 18, 2025" date format used across the site
+
+Page-level data (like `getPublishedPosts`) is awaited in the page frontmatter, not inline in the template: awaiting inside the template makes Astro drop the `transition:name` styles of the list images.
 
 ### Adding a New Markdoc Tag (Two-Step Rule)
 
@@ -109,6 +113,7 @@ See `youtube` / `YouTubeEmbed` as the canonical example of this pattern.
 
 | Component | Purpose | Key Props |
 |-----------|---------|-----------|
+| `PostList.astro` | Post list for `/blog` and `/reading` (round images, or small square `book` covers) | `posts: Post[]`, `imageStyle?: "round" \| "book"` |
 | `Renderer.astro` | Maps Markdoc AST → Astro components | `content: Content` |
 | `Heading.astro` | Renders h1–h6 from Markdoc heading node | `level: number` |
 | `CodeBlock.astro` | Syntax-highlighted code (Prism, Coldark Dark) | `content: string`, `language?: string` |
@@ -147,9 +152,10 @@ See `youtube` / `YouTubeEmbed` as the canonical example of this pattern.
 ### Image Conventions
 
 - All images live in `public/images/`
-- Use `.png` format — `.avif` was previously used but has been migrated away from
-- `previewImage` and `ogImagePath` frontmatter values are root-relative (e.g. `/images/foo.png`)
-- In `[slug].astro`, `ogImagePath` is converted to an absolute URL via `new URL(ogImagePath, SITE_URL)`
+- Use `.avif` for images shown on the site (`previewImage`, `{% previewimage %}`, backgrounds)
+- Use `.png` or `.jpeg` for `ogImagePath`: social networks don't render AVIF link previews (see `ship-daily-or-die-slowly.md`)
+- `previewImage` and `ogImagePath` frontmatter values are root-relative (e.g. `/images/foo.avif`)
+- In `[collection]/[slug].astro`, `ogImagePath` is converted to an absolute URL via `new URL(ogImagePath, SITE_URL)`
 
 ### RSS Feed
 

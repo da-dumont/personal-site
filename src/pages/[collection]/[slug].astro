@@ -1,0 +1,42 @@
+---
+import type { GetStaticPaths } from "astro";
+import { POST_COLLECTIONS, getPublishedPosts, renderPost, type Post } from "../../lib/posts";
+import Renderer from "../../components/Renderer.astro";
+import BlogPostMeta from "../../components/BlogPostMeta.astro";
+import ContentLayout from "../../layouts/ContentLayout.astro";
+import { SITE_URL } from "../../config";
+
+export const getStaticPaths = (async () => {
+  const posts = (await Promise.all(POST_COLLECTIONS.map(getPublishedPosts))).flat();
+
+  // posts that link to external websites get no page here
+  return posts
+    .filter((post) => !post.data.external)
+    .map((post) => ({
+      params: { collection: post.collection, slug: post.id },
+      props: { post },
+    }));
+}) satisfies GetStaticPaths;
+
+type Props = { post: Post };
+
+const { post } = Astro.props;
+const frontmatter = post.data;
+
+const ogImageAbsoluteUrl =
+  frontmatter.external !== true && frontmatter.ogImagePath
+    ? new URL(frontmatter.ogImagePath, SITE_URL).toString()
+    : undefined;
+---
+
+<ContentLayout title={frontmatter.title} date={frontmatter.date}>
+  <BlogPostMeta
+    title={frontmatter.title}
+    description={frontmatter.external ? undefined : frontmatter.description}
+    publishDate={frontmatter.date.toISOString()}
+    pagePath={`/${post.collection}/${post.id}`}
+    ogImageAbsoluteUrl={ogImageAbsoluteUrl}
+    slot="meta"
+  />
+  <Renderer content={renderPost(post)} slot="content" />
+</ContentLayout>

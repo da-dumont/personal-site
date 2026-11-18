@@ -18,21 +18,20 @@ This is a modern, high-performance blog built with [Astro](https://astro.build) 
 
 ## Content
 
-The site features three main content areas:
+The site features two content areas:
 
 - **Blog**: Technical articles and engineering leadership insights
-- **Projects**: Showcase of development work and open source contributions
 - **Reading**: Book reviews and notes on professional development
 
 ## Tech Stack
 
-- **Framework**: [Astro 6](https://astro.build) for static site generation
+- **Framework**: [Astro 7](https://astro.build) for static site generation, with content collections for posts
 - **Content**: [Markdoc](https://markdoc.dev) for enhanced markdown authoring
 - **Styling**: Plain CSS with custom properties (dark theme)
 - **Fonts**: Barlow (body), Oswald (headings) via Google Fonts
-- **Hosting**: Deployed on Netlify
+- **Hosting**: Deployed on Netlify (Node version pinned in `.nvmrc`; Astro 7 needs Node 22.23.4+)
 - **Language**: TypeScript throughout
-- **Schema Validation**: Zod for frontmatter validation at build time
+- **Schema Validation**: Zod (Astro's bundled `astro/zod`) for frontmatter validation at build time
 
 ## Development
 
@@ -45,6 +44,9 @@ yarn dev
 
 # Build for production
 yarn build
+
+# Type-check .astro and .ts files
+yarn typecheck
 
 # Preview production build
 yarn preview
