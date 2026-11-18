@@ -87,7 +87,7 @@ content/<collection>/*.md
   → Markdoc.transform()      # applies markdoc.config.ts (custom tags/nodes)
   → RenderableTree (AST)
   → Renderer.astro           # maps AST node names → Astro components
-  → ContentLayout / PageLayout
+  → PostLayout → PageLayout
   → HTML
 ```
 
@@ -95,8 +95,14 @@ Key helper functions in `src/lib/posts.ts`:
 - `getPublishedPosts(collection)` — non-draft posts, newest first; used by list pages, `[collection]/[slug].astro` and the RSS feed
 - `renderPost(post)` — Markdoc tree for `Renderer.astro`; only published posts are rendered, so an invalid tag in a draft doesn't fail the build
 - `formatPostDate(date)` — the "Sep 18, 2025" date format used across the site
+- `postHref(post)` — a post's page, or the `url` of an external post
+- `readingMinutes(post)` — the "N min read" on a post page
+- `imageTransitionName(postId)` — the view-transition name a preview image shares between the list and the post
+- `COLLECTION_PAGES` — each collection's label ("Writing", "Reading") and index path
 
-Page-level data (like `getPublishedPosts`) is awaited in the page frontmatter, not inline in the template: awaiting inside the template makes Astro drop the `transition:name` styles of the list images.
+Page-level data (like `getPublishedPosts`) is awaited in the page frontmatter, not inline in the template.
+
+A post's preview image morphs from the list into the post with native cross-document view transitions (`@view-transition` in `PageLayout`). Both images set `view-transition-name` inline from `imageTransitionName()`; Astro's `transition:name` isn't used, because its styles are dropped for images rendered inside the Markdoc body.
 
 ### Adding a New Markdoc Tag (Two-Step Rule)
 
@@ -113,9 +119,10 @@ See `youtube` / `YouTubeEmbed` as the canonical example of this pattern.
 
 | Component | Purpose | Key Props |
 |-----------|---------|-----------|
-| `PostList.astro` | Post list for `/blog` and `/reading` (round images, or small square `book` covers) | `posts: Post[]`, `imageStyle?: "round" \| "book"` |
+| `PageIntro.astro` | Label, headline and optional lead at the top of `/blog` and `/reading` | `label`, `title`, `lead?` |
+| `PostList.astro` | Post list for `/blog` and `/reading`: date, title, description, preview image (wide, or tall `book` covers) | `posts: Post[]`, `imageStyle?: "wide" \| "book"` |
 | `Renderer.astro` | Maps Markdoc AST → Astro components | `content: Content` |
-| `Heading.astro` | Renders h1–h6 from Markdoc heading node | `level: number` |
+| `Heading.astro` | Renders h1–h6 from Markdoc heading node (text comes through the slot) | `level: number` |
 | `CodeBlock.astro` | Syntax-highlighted code (Prism, Coldark Dark) | `content: string`, `language?: string` |
 | `YouTubeEmbed.astro` | YouTube iframe embed | `url: string`, `label: string` |
 | `TweetEmbed.astro` | Twitter embed via widgets.js | `url: string` |
@@ -134,24 +141,27 @@ See `youtube` / `YouTubeEmbed` as the canonical example of this pattern.
 
 | Component | Purpose | Slots |
 |-----------|---------|-------|
-| `PageLayout.astro` | Shell for list pages (blog, reading, home) | `meta`, `main` |
-| `ContentLayout.astro` | Shell for content pages (posts) — Props: `title: string`, `date: Date` | `meta`, `content` |
+| `BaseHead.astro` | `<head>` basics every page shares: charset, viewport, favicons, manifest, fonts, `styles/base.css` | — |
+| `PageLayout.astro` | Shell for `/blog`, `/reading` and posts: site header, still glow, footer | `meta`, default |
+| `PostLayout.astro` | A post page on `PageLayout`: back link, title, date, reading time, then the body (`styles/prose.css`) — Props: `post: Post` | `meta`, default |
+| `StoryLayout.astro` | The home page story (see "Home page story") | `meta`, default |
 
 **UI:**
 
 | Component | Purpose |
 |-----------|---------|
-| `Header.astro` | Top nav with social icon links |
-| `HeaderLink.astro` | Active-aware nav link (`href: string`) |
-| `Footer.astro` | Copyright footer |
-| `Favicon.astro` | Favicon and manifest `<link>` tags |
+| `Wordmark.astro` | The "D" mark and name linking home; used by `SiteHeader` and the story's `StoryBar` |
+| `SiteHeader.astro` | Bar on writing/reading pages: wordmark, Writing, Reading, Say hello (`aria-current` on the current index) |
+| `SiteFooter.astro` | Copyright, email and profile links (from `CONTACT` in `story/content.ts`) |
 
-**Icons** (in `src/components/ui/icons/`): `github.astro`, `twitter.astro`, `linkedin.astro`, `external-link.astro`
+**Styles:** `styles/base.css` holds the design system every page shares (tokens, base elements, `.label`, `.accent`, `.type-headline`, `.type-statement`, `.scrim`, `.skip-link`). `styles/story.css` adds what only the story needs; `styles/prose.css` styles a post body (`.prose`, the `div` Markdoc's document node renders). Elements marked `.unset` keep their own link and blockquote styles.
+
+**Favicons:** `public/favicon.svg` (switches fill for light browser chrome), `favicon.ico` (16/32), `apple-touch-icon.png` (180), `android-chrome-192x192.png`/`512x512.png`, linked from `BaseHead.astro`.
 
 ### Image Conventions
 
 - All images live in `public/images/`
-- Use `.avif` for images shown on the site (`previewImage`, `{% previewimage %}`, backgrounds)
+- Use `.avif` for images shown on the site (`previewImage`, `{% previewimage %}`)
 - Use `.png` or `.jpeg` for `ogImagePath`: social networks don't render AVIF link previews (see `ship-daily-or-die-slowly.md`)
 - `previewImage` and `ogImagePath` frontmatter values are root-relative (e.g. `/images/foo.avif`)
 - In `[collection]/[slug].astro`, `ogImagePath` is converted to an absolute URL via `new URL(ogImagePath, SITE_URL)`
@@ -164,12 +174,11 @@ Available at `/rss.xml`, generated by `src/pages/rss.xml.ts`.
 
 - **`PreviewImageEmbed.astro`** reads `slug` from `Astro.params` (the route context), not from props. Do not pass `slug` as a prop — it is ignored.
 - **`featured` flag** exists in the Zod schema but is not consumed anywhere in the UI. Setting it has no effect.
-- **`ViewTransitions`** is imported inside `BlogPostMeta.astro` rather than in the layout — intentional for per-page opt-in.
 - **External posts** appear in the blog listing but never have a `[slug].astro` page generated for them (filtered by `!frontmatter.external` in `getStaticPaths`).
 
 ## Home page story
 
-The home page (`src/pages/index.astro`) is a scroll-driven story in chapters, with its own layout and design system. Blog and reading pages are unaffected and still use `PageLayout`/`ContentLayout` and the typography below.
+The home page (`src/pages/index.astro`) is a scroll-driven story in chapters, with its own layout and design system. Blog and reading pages share its design system (`styles/base.css`) through `PageLayout`, without the motion.
 
 **Where things live** (keep these separate):
 - `src/story/content.ts` — every word on the page and the chapter list (`CHAPTERS`, ten chapters). Copy only; no markup or motion.
@@ -180,7 +189,7 @@ The home page (`src/pages/index.astro`) is a scroll-driven story in chapters, wi
 - `src/story/scene/` — the WebGL particle field (`ParticleField.ts`, `shaders.ts`) and the scene states keyed to chapter progress (`states.ts`, `SCENE_KEYS`).
 - `src/story/motion/` — Lenis smooth scroll and the scene driver (scroll → interpolated scene state → particle field + CSS `--glow-*` variables).
 - `src/story/main.ts` — boot order. Three.js loads as a separate chunk after the text is interactive.
-- `src/styles/story.css` — tokens (palette, type scale), `.line` reveals, chapter track/stage layout.
+- `src/styles/base.css` — tokens (palette, type scale) and shared type roles, used by every page; `src/styles/story.css` — `.line` reveals, chapter track/stage layout.
 
 **Adding a chapter:** add it to `CHAPTERS` and its copy to `content.ts`; add `ChapterX.astro` (a `section.chapter` with `id` = chapter id and `--track` height, containing a `.stage`) and put it in `pages/index.astro`; add `timelines/x.ts` and register it in `TIMELINES` in `main.ts`; add `SCENE_KEYS` for how the light should look through it (`opacity` dims the ribbon for quiet chapters).
 
@@ -192,7 +201,7 @@ The home page (`src/pages/index.astro`) is a scroll-driven story in chapters, wi
 - Never use GSAP's `stagger` in a scrubbed (chapter) timeline: it only applies the starting state to the first element, so the rest show early. Use `staggered()` from `timelines/reveal.ts`.
 - Things that take turns on one stage use `showBetween` (`autoAlpha`), so hidden ones can't take keyboard focus.
 - Astro scopes component styles: a chapter styling something inside `StoryHeading` (`.heading`, `.heading__title`) or a `> *` child selector needs `:global(...)`.
-- Text over busy light gets the global `.scrim` class. Shared type roles live in `story.css` (`.type-headline`, `.type-statement`, `.label`, `.accent`); use them instead of repeating font stacks.
+- Text over busy light gets the global `.scrim` class. Shared type roles live in `base.css` (`.type-headline`, `.type-statement`, `.label`, `.accent`); use them instead of repeating font stacks.
 - Explorers (`picker`, `intelligenceLoop`) start in `main.ts` whether or not motion is on; timelines may drive them but must never be required for them to work. Without JS, every note in an explorer is visible as a plain list.
 - Copy must be factual: use the supplied bio, the "working with me" doc and LinkedIn roles only. Family details stay exactly as they are in `content.ts` ("my wife and our three kids"): add nothing beyond them, and no names, town or phone number. "The work" covers Constant Contact and LinkSquares only; Harvard Business School Publishing is left out by choice. Keep Catalyst's "now" and "where it's going" separate; don't describe planned capabilities as shipped.
 - "What's next" lists the latest real blog posts from `getPublishedPosts("blog")`; never add placeholder posts.
@@ -200,54 +209,10 @@ The home page (`src/pages/index.astro`) is a scroll-driven story in chapters, wi
 
 ## Typography Overview
 
-The following applies to blog and reading pages; the home page story has its own type system in `src/styles/story.css`.
+Every page uses the same type, from `styles/base.css` (fonts self-hosted with Fontsource, imported in `BaseHead.astro`):
 
-### Font Families
-- **Primary (Body)**: "Barlow" with sans-serif fallback
-  - Used for: body text, paragraphs, general content, blockquotes
-  - Weight: 400 (regular)
-  - Supports weights: 100-900 (with italic variants)
-- **Secondary (Headings)**: "Oswald" with serif fallback  
-  - Used for: all headings (h1-h6)
-  - Weight: 500 (medium)
-  - Variable font supporting weights 200-700
-- **Monospace (Code)**: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace
-  - Used for: code blocks and inline code
-
-### Font Loading Strategy
-- **Google Fonts**: Loaded via stylesheet link in both PageLayout.astro and ContentLayout.astro
-- **Preconnect**: Uses `rel="preconnect"` for fonts.googleapis.com and fonts.gstatic.com (ContentLayout only)
-- **Display Strategy**: `&display=swap` parameter for faster font loading
-- **Font URL**: `https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&display=swap`
-
-### Type Scale
-- **Base font size**: 18px (body)
-- **Line height**: 1.65rem (body)
-- **Body max-width**: 70ch (increased from 60ch for better readability)
-- **Heading sizes**:
-  - h1: 2.5em (line-height: 1.2)
-  - h2: 1.6666667em (line-height: 1.3333333)  
-  - h3: 1.3333333em (line-height: 1.5)
-  - h4-h6: inherit size (line-height: 1.5555556)
-- **Component-specific sizes**:
-  - Blog post date: 0.875em
-  - Footer: 0.875rem
-  - Blockquotes: 1.125rem (with Barlow font family)
-
-### Responsive Font Behavior
-- **Blog posts**: 16px base on mobile, 18px on desktop (min-width: 640px)
-- **ContentLayout**: Uses media queries for responsive font scaling
-
-### Typography Variables
-- **Text colors**: CSS custom properties in `:root`
-  - `--text`: #ffffff (body text)
-  - `--text-muted`: #d2d3d7 (secondary text)
-  - `--text-heading`: #fafafa (headings)
-  - `--text-link`: #20bdff (links)
-  - `--code-text`: #cbd5e0 (code text)
-
-### Font Properties
-- **Font smoothing**: `-webkit-font-smoothing: antialiased` on body
-- **Font optical sizing**: `auto` for both Barlow and Oswald
-- **Font style**: `normal` for headings
-- **Font weight consistency**: 400 for body text, 500 for headings
+- **Display** — Inter Tight (`--font-display`): headlines, titles, labels. Tight tracking (`--tracking-display`, -0.045em) on large headlines.
+- **Body** — Inter (`--font-body`): running text. Post bodies are 1.125rem / 1.75 (1.0625rem on phones) in a `--measure` (42rem) column.
+- **Accent** — Instrument Serif italic (`--font-accent`): single accent words only (`.accent`, cyan → violet gradient).
+- **Code** — Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace (Prism Coldark Dark in `CodeBlock.astro`).
+- **Scale** — tokens in `:root`: `--fs-display`, `--fs-headline`, `--fs-lead`, `--fs-label`; colors `--text`, `--muted`, `--cyan`, `--violet`, `--blue`, `--amber` on `--obsidian`.

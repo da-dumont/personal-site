@@ -1,13 +1,14 @@
 ---
-import { CHAPTERS, CONTACT, introduction } from "../../story/content";
+import Wordmark from "../Wordmark.astro";
+import { CHAPTERS, CONTACT } from "../../story/content";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const total = pad(CHAPTERS.length);
 ---
 
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="bar">
-  <a class="wordmark" href="/" data-wordmark>{introduction.name}</a>
+  <Wordmark data-wordmark />
 
   <button class="progress label" popovertarget="chapter-index">
     <span class="visually-hidden">Chapter&nbsp;</span>
@@ -49,16 +50,11 @@ const total = pad(CHAPTERS.length);
     pointer-events: auto;
   }
 
-  .wordmark {
+  .bar > :global(.wordmark) {
     justify-self: start;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    letter-spacing: -0.01em;
-    text-decoration: none;
   }
   /* The wordmark fades in after the intro; keyboard focus must never land on something invisible. */
-  .wordmark:focus-visible {
+  .bar > :global(.wordmark:focus-visible) {
     opacity: 1 !important;
   }
 
@@ -129,20 +125,6 @@ const total = pad(CHAPTERS.length);
     color: var(--cyan);
   }
 
-  .skip {
-    position: fixed;
-    top: 0.75rem;
-    left: 50%;
-    z-index: 20;
-    transform: translate(-50%, -200%);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    background: var(--text);
-    color: var(--obsidian);
-  }
-  .skip:focus-visible {
-    transform: translate(-50%, 0);
-  }
 
   @media (max-width: 767px) {
     .progress__dash,

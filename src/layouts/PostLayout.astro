@@ -1,0 +1,74 @@
+---
+/*
+  Layout for a post written here (pages/[collection]/[slug].astro): the post's header,
+  then its body set in styles/prose.css. External posts have no page.
+*/
+import "../styles/prose.css";
+import PageLayout from "./PageLayout.astro";
+import { COLLECTION_PAGES, formatPostDate, readingMinutes, type Post } from "../lib/posts";
+
+type Props = { post: Post };
+
+const { post } = Astro.props;
+const { title, date } = post.data;
+const index = COLLECTION_PAGES[post.collection];
+---
+
+<PageLayout>
+  <slot name="meta" slot="meta" />
+  <article class="post">
+    <header class="post__header">
+      <a class="label post__back" href={index.href}><span aria-hidden="true">←</span> {index.label}</a>
+      <h1 class="post__title">{title}</h1>
+      <p class="post__meta">
+        <time datetime={date.toISOString()}>{formatPostDate(date)}</time>
+        <span aria-hidden="true">·</span>
+        <span>{readingMinutes(post)} min read</span>
+      </p>
+    </header>
+    <slot />
+    <p class="post__end">
+      <a class="label post__back" href={index.href}><span aria-hidden="true">←</span> All {index.label.toLowerCase()}</a>
+    </p>
+  </article>
+</PageLayout>
+
+<style>
+  .post {
+    max-width: var(--measure);
+    margin: 0 auto;
+  }
+  .post__header {
+    padding: clamp(3rem, 8vw, 6rem) 0 clamp(2rem, 5vw, 3rem);
+  }
+  .post__back {
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .post__back:hover,
+  .post__back:focus-visible {
+    color: var(--cyan);
+  }
+  .post__title {
+    margin: 1.5rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 1.4rem + 3.2vw, 3.75rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .post__meta {
+    display: flex;
+    gap: 0.6em;
+    margin: 1.5rem 0 0;
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .post__end {
+    margin: 4rem 0 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgb(152 166 187 / 0.14);
+  }
+</style>

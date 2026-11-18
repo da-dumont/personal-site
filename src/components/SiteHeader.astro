@@ -1,0 +1,71 @@
+---
+/* The bar on writing and reading pages: the wordmark, the two indexes, and a way to say hello. */
+import Wordmark from "./Wordmark.astro";
+import { COLLECTION_PAGES } from "../lib/posts";
+import { CONTACT } from "../story/content";
+
+const path = Astro.url.pathname;
+const pages = Object.values(COLLECTION_PAGES).map((page) => ({ ...page, current: path.startsWith(page.href) }));
+---
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <Wordmark />
+  <nav aria-label="Site">
+    <ul>
+      {
+        pages.map((page) => (
+          <li>
+            <a class="nav-link" href={page.href} aria-current={page.current ? "page" : undefined}>
+              {page.label}
+            </a>
+          </li>
+        ))
+      }
+      <li><a class="nav-link" href={`mailto:${CONTACT.email}`}>Say hello</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: var(--bar-height);
+    padding: 0 var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    background: rgb(5 7 13 / 0.72);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgb(152 166 187 / 0.1);
+  }
+
+  ul {
+    display: flex;
+    gap: clamp(1rem, 3vw, 2rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-decoration: none;
+    background: linear-gradient(var(--cyan), var(--cyan)) 0 100% / 0 1px no-repeat;
+    padding-bottom: 2px;
+    transition: color 0.3s, background-size 0.5s var(--ease-out);
+  }
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: var(--text);
+    background-size: 100% 1px;
+  }
+  .nav-link[aria-current="page"] {
+    color: var(--text);
+    background-size: 100% 1px;
+  }
+</style>

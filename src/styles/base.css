@@ -1,0 +1,154 @@
+/*
+  The design system shared by every page: tokens, base elements and type roles.
+  Colors are light sources in a dark room: the accents glow, they don't fill.
+  The home page story adds styles/story.css; posts add styles/prose.css.
+*/
+:root {
+  color-scheme: dark;
+
+  --obsidian: #05070d;
+  --midnight: #091323;
+  --slate: #101b2d;
+  --text: #f4f6fc;
+  --muted: #98a6bb;
+  --blue: #3b82f6;
+  --cyan: #22d3ee;
+  --violet: #9b7cff;
+  --amber: #ff9b54;
+
+  --font-display: "Inter Tight Variable", "Inter Tight", system-ui, sans-serif;
+  --font-body: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-accent: "Instrument Serif", Georgia, serif;
+
+  --fs-display: clamp(2.6rem, 0.9rem + 6.2vw, 7rem);
+  --fs-headline: clamp(2.2rem, 1rem + 4vw, 4.75rem);
+  --fs-word: clamp(1.75rem, 0.8rem + 3.6vw, 4.25rem);
+  --fs-lead: clamp(1.0625rem, 0.95rem + 0.45vw, 1.3125rem);
+  --fs-label: 0.75rem;
+  --tracking-display: -0.045em;
+  --tracking-label: 0.28em;
+
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --bar-height: 4.5rem;
+  --page-width: 64rem;
+  --measure: 42rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Set every frame by the scene driver; these are the opening values. */
+  --glow-x: 28%;
+  --glow-y: 72%;
+  --glow-rgb: 59 130 246;
+  --glow-strength: 0.55;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--obsidian);
+}
+
+body {
+  margin: 0;
+  background: var(--obsidian);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgb(34 211 238 / 0.3);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Off screen until a keyboard user tabs to it. */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 50%;
+  z-index: 20;
+  transform: translate(-50%, -200%);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: var(--text);
+  color: var(--obsidian);
+}
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+}
+
+/* Shared type roles */
+.label {
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  background: linear-gradient(100deg, var(--cyan), var(--violet) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.06em;
+}
+
+/* Type roles shared across chapters. */
+.type-headline {
+  font-family: var(--font-display);
+  font-size: var(--fs-headline);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: var(--tracking-display);
+}
+.type-statement {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+/* A soft pool of dark behind text that sits over busy light (the network, the dense ribbon). */
+.scrim {
+  position: relative;
+  isolation: isolate;
+}
+.scrim::before {
+  content: "";
+  position: absolute;
+  inset: -20% -14%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgb(5 7 13 / 0.82), rgb(5 7 13 / 0.5) 60%, transparent);
+  pointer-events: none;
+}

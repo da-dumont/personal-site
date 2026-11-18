@@ -108,6 +108,13 @@ export const config: Config = {
     },
   },
   nodes: {
+    // The page around a post is its <article>; the body is a plain container styled by styles/prose.css.
+    document: {
+      ...nodes.document,
+      transform(node, config) {
+        return new Tag("div", { class: "prose" }, node.transformChildren(config));
+      },
+    },
     heading: {
       render: "Heading",
       attributes: {

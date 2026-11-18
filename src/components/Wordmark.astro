@@ -1,0 +1,37 @@
+---
+/* The "D" mark and name, linking home. Used by the story bar and the site header. */
+import type { HTMLAttributes } from "astro/types";
+import { MY_NAME } from "../config";
+
+type Props = HTMLAttributes<"a">;
+---
+
+<a class="wordmark" href="/" {...Astro.props}>
+  <svg class="wordmark__mark" viewBox="13 16 71 68" aria-hidden="true" focusable="false">
+    <path
+      d="M22 16 H44 C69 16 84 32 84 50 C84 68 69 84 44 84 H22 V16 Z M37 30 V70 H44 C58 70 69 62 69 50 C69 38 58 30 44 30 Z"
+      fill="currentColor"
+      fill-rule="evenodd"></path>
+    <rect x="13" y="16" width="5" height="68" fill="#22d3ee"></rect>
+  </svg>
+  {MY_NAME}
+</a>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  .wordmark__mark {
+    display: block;
+    height: 1.15em;
+    width: auto;
+    flex: none;
+  }
+</style>

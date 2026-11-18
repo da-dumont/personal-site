@@ -1,8 +1,9 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import PageMeta from "../components/PageMeta.astro";
+import PageIntro from "../components/PageIntro.astro";
 import PostList from "../components/PostList.astro";
-import { getPublishedPosts } from "../lib/posts";
+import { COLLECTION_PAGES, getPublishedPosts } from "../lib/posts";
 import { SITE_TITLE } from "../config";
 
 const posts = await getPublishedPosts("reading");
@@ -10,5 +11,10 @@ const posts = await getPublishedPosts("reading");
 
 <PageLayout>
   <PageMeta title={`Recommended Books | ${SITE_TITLE}`} slot="meta" />
-  <PostList posts={posts} imageStyle="book" slot="main" />
+  <PageIntro
+    label={COLLECTION_PAGES.reading.label}
+    title="Books I recommend."
+    lead="And what I took from each one."
+  />
+  <PostList posts={posts} imageStyle="book" />
 </PageLayout>

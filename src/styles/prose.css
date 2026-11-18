@@ -1,0 +1,177 @@
+/*
+  A post's body, rendered from Markdoc (components/Renderer.astro) inside .prose.
+  Elements marked .unset (embedded tweets, for example) keep their own styles.
+*/
+.prose {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: rgb(244 246 252 / 0.86);
+}
+
+.prose > * {
+  margin: 0 0 1.4em;
+}
+
+.prose :is(h2, h3, h4, h5, h6) {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text);
+  text-wrap: balance;
+}
+.prose h2 {
+  margin: 2.6em 0 0.7em;
+  font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+.prose h3 {
+  margin: 2.2em 0 0.6em;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+.prose :is(h4, h5, h6) {
+  margin: 2em 0 0.5em;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.prose a:not(.unset) {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-decoration-color: rgb(34 211 238 / 0.4);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.3s;
+}
+.prose a:not(.unset):hover {
+  text-decoration-color: var(--cyan);
+}
+
+.prose :is(strong, b) {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.prose :is(ul, ol) {
+  padding-left: 1.25em;
+}
+.prose li {
+  margin: 0.4em 0;
+  padding-left: 0.3em;
+}
+.prose li::marker {
+  color: var(--cyan);
+}
+
+.prose blockquote:not(.unset) {
+  margin: 2em 0;
+  padding: 0.25em 0 0.25em 1.5rem;
+  border-left: 2px solid;
+  border-image: linear-gradient(var(--cyan), var(--violet)) 1;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.prose blockquote:not(.unset) > :last-child {
+  margin-bottom: 0;
+}
+
+.prose hr {
+  height: 1px;
+  margin: 3.5em 0;
+  border: 0;
+  background: linear-gradient(90deg, var(--cyan), rgb(155 124 255 / 0.4) 40%, transparent);
+}
+
+/* Images run wider than the text, up to the page width. */
+.prose figure {
+  margin: 2.5em calc(50% - min(var(--page-width), 100vw - 2 * var(--gutter)) / 2);
+}
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  border-radius: 16px;
+  border: 1px solid rgb(152 166 187 / 0.14);
+}
+.prose > figure:first-child {
+  margin-top: 0;
+}
+
+.prose :not(pre) > code {
+  padding: 0.1em 0.35em;
+  border: 1px solid rgb(152 166 187 / 0.18);
+  border-radius: 6px;
+  background: rgb(152 166 187 / 0.1);
+  font-size: 0.875em;
+  color: var(--text);
+}
+.prose pre {
+  padding: 1.25rem;
+  border: 1px solid rgb(152 166 187 / 0.15);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.prose :is(th, td) {
+  padding: 0.65em 0.75em;
+  border-bottom: 1px solid rgb(152 166 187 / 0.14);
+  text-align: left;
+}
+.prose th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.prose details {
+  padding: 1rem 1.25rem;
+  border: 1px solid rgb(152 166 187 / 0.15);
+  border-radius: 12px;
+}
+.prose summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.prose kbd {
+  padding: 0.1em 0.4em;
+  border: 1px solid rgb(152 166 187 / 0.3);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  font-size: 0.85em;
+  color: var(--text);
+}
+.prose mark {
+  padding: 0 0.15em;
+  border-radius: 3px;
+  background: rgb(155 124 255 / 0.3);
+  color: var(--text);
+}
+.prose abbr[title] {
+  text-decoration: underline dotted;
+  text-underline-offset: 0.2em;
+}
+
+.prose iframe {
+  max-width: 100%;
+  border: 0;
+  border-radius: 12px;
+}
+
+@media (max-width: 767px) {
+  .prose {
+    font-size: 1.0625rem;
+  }
+}

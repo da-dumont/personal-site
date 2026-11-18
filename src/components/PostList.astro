@@ -1,100 +1,127 @@
 ---
-import { formatPostDate, type Post } from "../lib/posts";
+import { formatPostDate, imageTransitionName, postHref, type Post } from "../lib/posts";
 
 type Props = {
   posts: Post[];
-  /** "book" shows small square covers instead of large round images. */
-  imageStyle?: "round" | "book";
+  /** "book" shows tall covers instead of wide images. */
+  imageStyle?: "wide" | "book";
 };
 
-const { posts, imageStyle = "round" } = Astro.props;
-const isBook = imageStyle === "book";
+const { posts, imageStyle = "wide" } = Astro.props;
 ---
 
-<section>
-  <ul>
-    {
-      posts.map((post) => (
-        <li class="post title">
-          <a class="block" href={post.data.external ? post.data.url : `/${post.collection}/${post.id}`}>
-            <div>
-              <h3>{post.data.title}</h3>
-              <time datetime={post.data.date.toISOString()} class="publish-date">
-                {formatPostDate(post.data.date)}
-              </time>
-            </div>
-            {post.data.previewImage && (
-              <div class:list={["image-container", { "image-container-book": isBook }]}>
-                <img
-                  src={post.data.previewImage}
-                  class:list={["preview-image", { "preview-image-book": isBook }]}
-                  transition:name={post.id}
-                />
-              </div>
+<ol class:list={["posts", `posts--${imageStyle}`]}>
+  {
+    posts.map((post) => (
+      <li>
+        <a class="post" href={postHref(post)}>
+          <time class="post__date" datetime={post.data.date.toISOString()}>
+            {formatPostDate(post.data.date)}
+          </time>
+          <span class="post__text">
+            <span class="post__title">{post.data.title}</span>
+            {!post.data.external && post.data.description && (
+              <span class="post__description">{post.data.description}</span>
             )}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</section>
+          </span>
+          {post.data.previewImage && (
+            <img class="post__image" src={post.data.previewImage} alt="" loading="lazy" style={`view-transition-name: ${imageTransitionName(post.id)}`} />
+          )}
+        </a>
+      </li>
+    ))
+  }
+</ol>
 
 <style>
-  ul {
-    list-style-type: none;
-    padding: unset;
+  .posts {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid rgb(152 166 187 / 0.14);
   }
 
   .post {
-    line-height: 1.5;
-    margin: 0 0 4rem 0;
-    padding: 0;
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr) var(--image-width);
+    align-items: start;
+    column-gap: clamp(1.25rem, 3vw, 2.5rem);
+    padding: 1.75rem 0;
+    border-top: 1px solid rgb(152 166 187 / 0.14);
+    text-decoration: none;
+    transition: background 0.4s var(--ease-out);
+  }
+  .posts--wide {
+    --image-width: 11rem;
+    --image-ratio: 4 / 3;
+  }
+  .posts--book {
+    --image-width: 6rem;
+    --image-ratio: 2 / 3;
+  }
+  .post:hover,
+  .post:focus-visible {
+    background: linear-gradient(90deg, rgb(34 211 238 / 0.06), transparent 70%);
   }
 
-  .post a {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    column-gap: 20px;
+  .post__date {
+    padding-top: 0.45rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .post__text {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .post__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    transition: color 0.3s;
+  }
+  .post:hover .post__title,
+  .post:focus-visible .post__title {
+    color: var(--cyan);
+  }
+  .post__description {
+    color: var(--muted);
+    max-width: 52ch;
+  }
+  .post__image {
+    grid-column: 3;
+    width: 100%;
+    aspect-ratio: var(--image-ratio);
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgb(152 166 187 / 0.14);
+    background: var(--midnight);
   }
 
-  .image-container {
-    max-width: 200px;
-    max-height: 200px;
-  }
-  .image-container-book {
-    max-width: 100px;
-    max-height: 100px;
-  }
-
-  .preview-image {
-    border-radius: 50%;
-    object-fit: contain;
-  }
-  .preview-image-book {
-    border-radius: 0;
-  }
-
-  .post + .post {
-    padding-top: 0.5rem;
-  }
-  .post h3 {
-    margin: 0;
-    font-size: 1.75rem;
-  }
-
-  .title a {
-    color: var(--text);
-    border-bottom: none;
-  }
-
-  .title a:hover {
-    color: var(--text-link);
-  }
-
-  .publish-date {
-    color: var(--text-muted);
-    font-size: 0.875rem;
-    font-style: italic;
+  @media (max-width: 767px) {
+    .post {
+      grid-template-columns: minmax(0, 1fr) calc(var(--image-width) * 0.55);
+      row-gap: 0.4rem;
+      padding: 1.25rem 0;
+    }
+    .post__date {
+      grid-column: 1;
+      padding-top: 0;
+    }
+    .post__text {
+      grid-column: 1;
+    }
+    .post__title {
+      font-size: 1.125rem;
+    }
+    .post__description {
+      font-size: 0.9375rem;
+    }
+    .post__image {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
   }
 </style>

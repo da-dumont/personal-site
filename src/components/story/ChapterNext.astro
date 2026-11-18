@@ -1,14 +1,14 @@
 ---
 import StoryHeading from "./StoryHeading.astro";
 import { next } from "../../story/content";
-import { formatPostDate, getPublishedPosts } from "../../lib/posts";
+import { formatPostDate, getPublishedPosts, postHref } from "../../lib/posts";
 
 /** The latest real posts; external links go where they point. */
 const posts = (await getPublishedPosts("blog")).slice(0, 4).map((post) => ({
   title: post.data.title,
   date: post.data.date,
   description: post.data.external ? undefined : post.data.description,
-  href: post.data.external ? post.data.url : `/blog/${post.id}`,
+  href: postHref(post),
 }));
 ---
 

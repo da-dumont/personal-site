@@ -28,7 +28,7 @@ The site features two content areas:
 - **Framework**: [Astro 7](https://astro.build) for static site generation, with content collections for posts
 - **Content**: [Markdoc](https://markdoc.dev) for enhanced markdown authoring
 - **Styling**: Plain CSS with custom properties (dark theme)
-- **Fonts**: Barlow (body), Oswald (headings) via Google Fonts
+- **Fonts**: Inter Tight (display), Inter (body), Instrument Serif (accent), self-hosted with Fontsource
 - **Hosting**: Deployed on Netlify (Node version pinned in `.nvmrc`; Astro 7 needs Node 22.23.4+)
 - **Language**: TypeScript throughout
 - **Schema Validation**: Zod (Astro's bundled `astro/zod`) for frontmatter validation at build time
