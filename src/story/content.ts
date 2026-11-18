@@ -52,7 +52,7 @@ export const introduction = {
   /** Set apart from the last statement line in the accent face. */
   statementAccent: "next.",
   supporting:
-    "I'm an engineering leader, builder, husband, and dad. I spend my days figuring out how to turn complicated ideas into useful products, and how to help good people do the best work of their careers.",
+    "I lead engineering teams. I'm also a husband and a dad. Most of my days go to turning complicated ideas into products people use, and helping good people do the best work of their careers.",
   portraitAlt: "Dan Dumont, smiling, in a light blue collared shirt",
 } as const;
 
@@ -67,7 +67,7 @@ export const person = {
     { text: "Curious by nature", depth: -0.9, x: 56, y: 42, mx: 18, my: 55 },
   ],
   message:
-    "I've spent a large part of my life building software, but the things I care about go well beyond the software itself.",
+    "I've spent a big part of my life building software. Plenty of what I care about happens away from it.",
   facts: ["Massachusetts", "Roots in front-end engineering and design", "15+ years building software"],
 } as const;
 
@@ -78,19 +78,19 @@ export interface ChapterHeading {
 }
 
 export const building = {
-  heading: { label: "How I build", lines: ["The technology matters.", "The problem matters more."] },
+  heading: { label: "How I build", lines: ["The problem", "comes first."] },
   beats: [
     {
       title: "Understand the problem.",
-      body: "Every decision starts with one question: does this make things better for the person using the product? Most hard problems don't arrive with clean answers, so I stay in the ambiguity long enough to understand it, without letting it stall the team.",
+      body: "The question I keep coming back to is whether this makes things better for the person using it. Hard problems rarely show up with clean answers. I'll sit in the ambiguity long enough to understand it, as long as the team keeps moving.",
     },
     {
       title: "Make the complicated understandable.",
-      body: "Early decisions compound. A name becomes an abstraction, an abstraction becomes a pattern, a pattern becomes architecture. I favor systems that are explicit and straightforward over ones that are clever and rigid.",
+      body: "Early decisions compound. A name turns into an abstraction, and a few of those harden into architecture. So I'll pick plain, explicit code over clever code that's hard to change.",
     },
     {
-      title: "Build something that actually works.",
-      body: "Get something real in front of people quickly, learn what matters, and build from there. Most features have a core that delivers most of the value. Ship that, validate it, then decide whether the rest is worth building.",
+      title: "Ship the part that matters.",
+      body: "Get something real in front of people quickly and learn from it. Most features have a small core that carries most of the value. I ship that first and watch how people use it before deciding if the rest is worth building.",
     },
   ],
   /** The layers of the interactive diagram, top to bottom. */
@@ -98,100 +98,100 @@ export const building = {
     {
       id: "customer",
       name: "Customer",
-      note: "Not cleaner internally. Not more architecturally elegant. Better for the person using it. If we can't say how, it's worth pausing before we build.",
+      note: "The test is whether it's better for the person using it. If we can't say how, I'd pause before we build.",
     },
     {
       id: "experience",
       name: "Experience",
-      note: "My roots are in front-end engineering and design. How a product feels to use is part of whether it works, not a coat of paint on top.",
+      note: "My roots are in front-end engineering and design. How a product feels to use is part of whether it works.",
     },
     {
       id: "logic",
       name: "Product logic",
-      note: "Find the version that delivers most of the value for a fraction of the work. Ship it, learn from it, and only then decide what else to build.",
+      note: "Find the version that gets most of the value for a fraction of the work. Ship it and learn from it before deciding what else to build.",
     },
     {
       id: "platform",
       name: "Platform",
-      note: "Design for adaptability, not correctness. Being right up front matters less than being easy to change later. Make being wrong recoverable.",
+      note: "Some early calls will be wrong. Build so they're cheap to undo.",
     },
     {
       id: "signals",
       name: "Signals",
-      note: "A feature shipped to a small group with a clear signal beats a broad launch with vague engagement data. Shipping isn't progress if nothing is learned from it.",
+      note: "I'd rather ship to a small group and get a clear signal than launch wide and get vague engagement numbers.",
     },
   ],
   layersHint: "Select a layer to see how I think about it.",
 } as const;
 
 export const leadership = {
-  heading: { label: "Leadership", lines: ["Great teams don't", "happen by accident."] },
+  heading: { label: "Leadership", lines: ["Good teams get built", "on purpose."] },
   principles: [
-    { name: "Accountability", line: "Own the outcome.", body: ["Not just the task.", "Not just the ticket.", "The actual result."] },
+    { name: "Accountability", line: "Own the outcome.", body: ["You own the result,", "even after the ticket closes."] },
     {
       name: "Clarity",
       line: "Say what matters.",
-      body: ["Make decisions understandable.", "Remove confusion.", "Give people the context to act."],
+      body: ["Explain decisions so they make sense.", "Give people enough context to act on their own."],
     },
     {
       name: "Urgency",
-      line: "Make progress count.",
-      body: ["Move deliberately.", "Don't confuse process with progress."],
+      line: "Keep things moving.",
+      body: ["Decide, then go.", "Don't confuse process with progress."],
     },
   ],
   reflection: [
-    "Leadership isn't demanding more output. It's coaching engineers, building judgment, and helping a team understand why its work matters.",
-    "I hire and develop people I'd want to work for, give them context and clear goals, then get out of the way. I want engineers who challenge me, bring product judgment, and understand what they're building instead of trusting whatever the AI hands back.",
+    "Most of leading a team is coaching. I help engineers build judgment and make sure they know why their work matters.",
+    "I try to hire people I'd want to work for. I give them context and clear goals and then get out of their way. I like engineers who push back on me and have opinions about the product. They should understand what they ship, even when an AI wrote it.",
   ],
 } as const;
 
 export const ai = {
   heading: {
     label: "Building with AI",
-    lines: ["AI is changing how we build."],
+    lines: ["AI is changing what we can build."],
   },
   /** The second, quieter half of the headline. */
-  turn: "I'm more interested in how it changes what we can build.",
+  turn: "That's the part I keep thinking about.",
   shift: [
-    "When generating code is cheap and fast, the old walls between engineering, product, and design matter less. Builders are builders.",
-    "The bottleneck used to be writing enough code. Now it's unclear context and ownership gaps before anything exists, and review queues and the gap between done and shipped after. The loop I push toward: frame, build, observe, adjust.",
+    "Code is cheap and fast to generate now, so the old walls between engineering, product and design matter less. Builders are builders.",
+    "Writing enough code used to be the slow part. Now the slow parts are fuzzy context and unclear ownership before anything gets built, then review queues and the gap between done and shipped. I push teams toward short loops. Frame the problem and build, then watch what happens and adjust.",
   ],
   loopTitle: "How an AI-native product works",
   stages: [
     {
       id: "understand",
       name: "Understand",
-      note: "Context comes first. An assistant is only as useful as what it knows about the business: its customers, what has worked before, what's happening this week.",
+      note: "An assistant is only as useful as what it knows about the business. That means its customers and what's worked before, plus whatever is going on this week.",
     },
     {
       id: "recommend",
       name: "Recommend",
-      note: "Turn that context into a short list of what matters next, with the reasoning visible, so a person can judge it instead of taking it on faith.",
+      note: "Turn that into a short list of what to do next. Show the reasoning so the owner can judge it for themselves.",
     },
     {
       id: "act",
       name: "Act",
-      note: "Agents use real tools to do the work, in durable workflows that survive retries and restarts, with a human deciding what goes out.",
+      note: "Agents do the work with real tools. The workflows survive retries and restarts, and a person still decides what goes out.",
     },
     {
       id: "measure",
       name: "Measure",
-      note: "Observe what actually happened: evaluations and tracing on the system itself, and real outcomes for the business it serves.",
+      note: "Check what happened, with evals and tracing on the system and real results from the business.",
     },
     {
       id: "learn",
       name: "Learn",
-      note: "Feed the results back into the context, so the next recommendation is better than the last.",
+      note: "Feed the results back in so the next recommendation is better than the last one.",
     },
   ],
   catalyst: {
     now: {
       label: "What I'm building now",
-      body: "At Constant Contact, I'm helping build Catalyst, an AI marketing assistant for small businesses. It's a shift from handing owners tools to run their marketing themselves, toward an assistant that understands their business, recommends what matters, and helps get the work done.",
+      body: "At Constant Contact I'm helping build Catalyst, an AI marketing assistant for small businesses. Owners usually get a set of tools and have to run their own marketing. Catalyst learns the business and suggests what to focus on. Then it helps get the work done.",
     },
     next: {
       label: "Where it's going",
-      body: "The ambition is the full loop: an assistant that learns from the results, so each round of recommendations gets better. That's the part I find most interesting, and it's still being built.",
+      body: "We're aiming for the full loop, where the assistant learns from the results and each round of recommendations gets better. That part is still being built, and it's the piece I find most interesting.",
     },
   },
 } as const;
@@ -205,7 +205,7 @@ export const work = {
       company: "Constant Contact",
       product: "Catalyst",
       summary:
-        "Director of Software Engineering on Catalyst, Constant Contact's AI-native marketing product for small businesses: agent systems, AI-native product experiences, engineering leadership, and the product development around them.",
+        "Director of Software Engineering on Catalyst, Constant Contact's AI marketing product for small businesses. I lead engineering for its agent systems and the product experience built on them.",
       roles: [{ title: "Director of Software Engineering", years: "May 2026–now" }],
     },
     {
@@ -214,7 +214,7 @@ export const work = {
       company: "LinkSquares",
       product: "Platform, integrations and frontend",
       summary:
-        "Joined during a period of rapid growth and scaled the team while integrating 30+ new engineers. Went on to lead Platform, Integrations, DevOps, and Frontend across multiple teams and engineering managers at a Series C SaaS company, owning customer-facing product areas and the systems behind them.",
+        "Joined a Series C SaaS company while it was growing fast and helped bring 30+ new engineers onto the team. Later I led Platform, Integrations, DevOps and Frontend, with several teams and engineering managers under me. That covered customer-facing product areas and the systems behind them.",
       roles: [
         { title: "Director of Engineering", years: "Jul 2023–Mar 2026" },
         { title: "Senior Software Engineering Manager", years: "Nov 2021–Jul 2023" },
@@ -226,7 +226,7 @@ export const work = {
       company: "Constant Contact",
       product: "Email authoring",
       summary:
-        "Twelve years, starting as an email template developer and growing through UX and front-end engineering into management. By the end, I led a 17-engineer Email Authoring organization supporting a revenue-critical product used by thousands of people every day.",
+        "Twelve years. I started as an email template developer and worked through UX and front-end engineering into management. By the end I led a 17-engineer Email Authoring organization on a product the business depended on, used by thousands of people every day.",
       roles: [
         { title: "Senior Software Engineering Manager", years: "Jun 2021–Nov 2021" },
         { title: "Software Engineering Manager", years: "Oct 2018–Jun 2021" },
@@ -245,7 +245,7 @@ export const lessons = {
   statements: [
     {
       line: "More code isn't always more progress.",
-      body: "What shipped? What changed? What did we learn? A team moving fast without making progress is a problem worth understanding. Busy is not the goal.",
+      body: "I care about what shipped and what we learned from it. When a team is moving fast and not getting anywhere, I want to know why.",
     },
     {
       line: "The best engineers understand the customer.",
@@ -253,28 +253,28 @@ export const lessons = {
     },
     {
       line: "Clarity is a form of respect.",
-      body: "I can work with bad news. Finding out too late is harder. Being direct, even when it's uncomfortable, gives people the chance to respond while there's still room to.",
+      body: "I can work with bad news. Finding out too late is harder. Being direct gives people a chance to respond while there's still time.",
     },
     {
       line: "Ownership means caring what happens after you ship.",
-      body: "When something goes wrong, own the recovery and share what you learned. Shipping isn't the finish line.",
+      body: "When something goes wrong, own the recovery and share what you learned.",
     },
     {
-      line: "AI can accelerate the work. It shouldn't replace the thinking.",
-      body: "I want engineers who understand what they're building, not ones who trust an implementation because a model wrote it confidently.",
+      line: "AI can write the code. You still have to understand it.",
+      body: "Models sound just as confident when they're wrong. I expect engineers to know what they're shipping.",
     },
     {
       line: "Sometimes the most important decision is what not to build.",
-      body: "Find the core that delivers the value, ship it, validate it, and then decide whether the rest is worth building. Often it isn't.",
+      body: "Most of the value usually sits in a small core. Ship that and see if anyone wants more. Often the rest isn't worth building.",
     },
   ],
 } as const;
 
 export const family = {
-  heading: { label: "Beyond the code", lines: ["The most important things", "I'm building aren't", "made of software."] },
+  heading: { label: "Beyond the code", lines: ["What matters", "most to me", "is at home."] },
   body: [
-    "I'm a husband and a dad. And as much as I care about what I build at work, the people waiting for me at home matter more.",
-    "I want to do meaningful work. I also want to be there for the moments that don't happen twice.",
+    "I'm a husband and a dad. I care about the work, and my family comes first.",
+    "I want to do meaningful work and still be there for the moments that only happen once.",
   ],
   /** Small, real details: no names, no town. */
   details: [
@@ -291,14 +291,14 @@ export const next = {
     label: "What's next",
     lines: ["I'm still figuring out what's next."],
   },
-  turn: "That's part of what makes it interesting.",
+  turn: "I'm okay with that.",
   exploring: [
     "Building AI-native products people can trust",
     "How AI changes the shape of engineering organizations",
     "Better ways to develop and evaluate agent systems",
     "Helping engineers become stronger product thinkers",
-    "Teams that own outcomes, not activity",
-    "Keeping the human part of engineering front and center",
+    "Teams that own outcomes",
+    "The human side of engineering",
   ],
   writingLabel: "Writing",
   links: [
@@ -308,8 +308,8 @@ export const next = {
 } as const;
 
 export const closing = {
-  statement: ["Build things that matter.", "Lead people well."],
+  statement: ["Build useful things.", "Lead people well."],
   /** Set apart in the accent face. */
-  accent: "Don't forget what matters most.",
-  invitation: "If any of this resonates, I'd like to hear from you.",
+  accent: "Be home for dinner.",
+  invitation: "I'm happy to talk about any of this.",
 } as const;

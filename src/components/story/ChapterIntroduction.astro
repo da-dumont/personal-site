@@ -33,7 +33,7 @@ const lastLine = introduction.statement.length - 1;
         }
       </p>
     </div>
-    <p class="intro__supporting" data-intro="supporting" data-reveal>{introduction.supporting}</p>
+    <p class="intro__supporting scrim" data-intro="supporting" data-reveal>{introduction.supporting}</p>
 
     <div class="portrait" data-intro="portrait" data-reveal style={`--silhouette: url(${silhouette.src})`}>
       <Picture
@@ -111,7 +111,8 @@ const lastLine = introduction.statement.length - 1;
     right: max(var(--gutter), 3vw);
     bottom: 0;
     z-index: 1;
-    height: min(90svh, 62rem);
+    /* Narrow landscape screens cap it by width, so it stays clear of the copy. */
+    height: min(90svh, 62rem, 52vw * 914 / 858);
     aspect-ratio: 858 / 914;
     transform-origin: 50% 80%;
     -webkit-mask-image:
@@ -202,7 +203,8 @@ const lastLine = introduction.statement.length - 1;
     display: none;
   }
 
-  @media (max-width: 767px) {
+  /* Phones, and tablets held upright: the portrait is too tall to sit beside the copy, so it goes below it. */
+  @media (max-width: 767px), (orientation: portrait) and (max-width: 1100px) {
     .intro .stage {
       align-content: start;
       padding-top: calc(var(--bar-height) + 4svh);
@@ -219,7 +221,7 @@ const lastLine = introduction.statement.length - 1;
       translate: -50% 0;
       height: 58svh;
     }
-    /* Laid over the portrait's faded lower edge. */
+    /* Laid over the portrait's lower edge, on a dark band so it stays readable against the shirt. */
     .intro__supporting {
       position: absolute;
       left: var(--gutter);
@@ -228,7 +230,11 @@ const lastLine = introduction.statement.length - 1;
       z-index: 2;
       max-width: none;
       font-size: 1rem;
-      text-shadow: 0 1px 12px rgb(5 7 13 / 0.9);
+    }
+    /* The scrim becomes a full-width band reaching the bottom of the screen. */
+    .intro__supporting::before {
+      inset: -4rem calc(-1 * var(--gutter)) -2rem;
+      background: linear-gradient(to bottom, transparent, rgb(5 7 13 / 0.9) 4rem);
     }
     .cue {
       display: none;
@@ -246,6 +252,9 @@ const lastLine = introduction.statement.length - 1;
     }
     :global(html:not(.story-motion)) .intro__supporting {
       position: static;
+    }
+    :global(html:not(.story-motion)) .intro__supporting::before {
+      display: none;
     }
   }
 </style>
