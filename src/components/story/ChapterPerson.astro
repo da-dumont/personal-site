@@ -1,0 +1,148 @@
+---
+import { person } from "../../story/content";
+
+/** Depth -1..1 becomes a z offset; far words are smaller, softer and dimmer. */
+const wordStyle = (word: (typeof person.words)[number]) =>
+  [
+    `--x: ${word.x}`,
+    `--y: ${word.y}`,
+    `--mx: ${word.mx}`,
+    `--my: ${word.my}`,
+    `--z: ${Math.round(word.depth * 420)}`,
+    // Only far words get a filter: a filter on every word would cost a compositing layer each.
+    `--focus: ${word.depth < 0 ? `blur(${(-word.depth * 2.5).toFixed(2)}px)` : "none"}`,
+    `--dim: ${0.55 + 0.45 * ((word.depth + 1) / 2)}`,
+  ].join("; ");
+---
+
+<section id="person" class="chapter person" aria-labelledby="person-title" style="--track: 320vh">
+  <div class="stage">
+    <ul class="words" data-person="stage" aria-label="A few words that describe me">
+      {
+        person.words.map((word) => (
+          <li class="word" style={wordStyle(word)} data-person-word data-reveal>
+            {word.text}
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2 id="person-title" class="person__headline type-headline" data-person="headline">
+      <span class="line"><span data-reveal>{person.headline}</span></span>
+    </h2>
+
+    <div class="person__body">
+      <p class="person__message" data-person="message" data-reveal>{person.message}</p>
+      <ul class="person__facts label" data-person="facts" data-reveal>
+        {person.facts.map((fact) => <li>{fact}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .person .stage {
+    display: grid;
+    place-items: center;
+    padding: var(--bar-height) var(--gutter);
+    perspective: 1000px;
+  }
+  .person .stage > * {
+    grid-area: 1 / 1;
+  }
+
+  .person__headline {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    max-width: 16ch;
+    text-align: center;
+  }
+
+  .words {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transform-style: preserve-3d;
+  }
+
+  .word {
+    position: absolute;
+    left: calc(var(--x) * 1%);
+    top: calc(var(--y) * 1%);
+    transform: translate(-50%, -50%) translateZ(calc((var(--z) + var(--dolly, 0)) * 1px));
+    font-family: var(--font-display);
+    font-size: var(--fs-word);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    color: rgb(244 246 252 / var(--dim));
+    filter: var(--focus);
+  }
+
+  .person__body {
+    position: relative;
+    z-index: 2;
+    max-width: 40rem;
+    text-align: center;
+  }
+
+  .person__message {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.375rem, 1rem + 1.4vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .person__facts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 0;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .person__facts li + li::before {
+    content: "·";
+    margin: 0 0.9em;
+    color: var(--cyan);
+  }
+
+  /* Without motion: headline, the words as a quiet row, then the message. */
+  :global(html:not(.story-motion)) .person .stage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    perspective: none;
+  }
+  :global(html:not(.story-motion)) .person__headline {
+    order: -1;
+  }
+  :global(html:not(.story-motion)) .words {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 2rem;
+  }
+  :global(html:not(.story-motion)) .word {
+    position: static;
+    transform: none;
+    filter: none;
+    font-size: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+  }
+
+  @media (max-width: 767px) {
+    .word {
+      left: calc(var(--mx) * 1%);
+      top: calc(var(--my) * 1%);
+      transform: translateY(-50%) translateZ(calc((var(--z) * 0.6 + var(--dolly, 0) * 0.6) * 1px));
+    }
+  }
+</style>

@@ -1,0 +1,180 @@
+---
+import StoryHeading from "./StoryHeading.astro";
+import { leadership } from "../../story/content";
+import { edgeAttrs, morphAttrs, networkLayout } from "../../story/lib/layouts";
+
+const network = networkLayout();
+---
+
+<section id="leadership" class="chapter leadership" aria-labelledby="leadership-title" style="--track: 500vh">
+  <div class="stage">
+    <svg
+      class="network"
+      viewBox={`0 0 ${network.width} ${network.height}`}
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+      data-leadership="network"
+      data-reveal
+    >
+      <g class="network__local">{network.local.map((edge) => <line {...edgeAttrs(edge, network.nodes)} />)}</g>
+      <g class="network__cross" data-leadership="cross">
+        {network.cross.map((edge) => <line pathLength="1" {...edgeAttrs(edge, network.nodes)} />)}
+      </g>
+      <g class="network__flow" data-leadership="flow">
+        {[...network.local, ...network.cross].map((edge) => <line {...edgeAttrs(edge, network.nodes)} />)}
+      </g>
+      <g class="network__rings" data-leadership="rings">
+        {network.nodes.map((node) => <circle r="13" {...morphAttrs(node)} />)}
+      </g>
+      <g class="network__nodes">{network.nodes.map((node) => <circle data-node r="4.5" {...morphAttrs(node)} />)}</g>
+    </svg>
+
+    <StoryHeading heading={leadership.heading} id="leadership-title" align="center" class="scrim" />
+
+    <ol class="principles">
+      {
+        leadership.principles.map((principle, i) => (
+          <li class="principle scrim" data-principle={i} data-reveal>
+            <p class="label principle__name">{principle.name}</p>
+            <p class="principle__line">{principle.line}</p>
+            <p class="principle__body">
+              {principle.body.map((line) => (
+                <span>{line}</span>
+              ))}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="reflection type-statement scrim" data-leadership="reflection" data-reveal>
+      {leadership.reflection.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .leadership .stage {
+    display: grid;
+    place-items: center;
+    padding: var(--bar-height) var(--gutter);
+  }
+  .leadership .stage > :global(:not(.network)) {
+    grid-area: 1 / 1;
+    position: relative;
+    z-index: 2;
+  }
+
+  .network {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .network line {
+    stroke-linecap: round;
+  }
+  .network__local line {
+    stroke: rgb(59 130 246 / var(--edge-alpha, 0.22));
+    stroke-width: 1;
+  }
+  .network__cross line {
+    stroke: rgb(155 124 255 / 0.55);
+    stroke-width: 1.25;
+    stroke-dasharray: 1;
+  }
+  .network__flow line {
+    stroke: rgb(34 211 238 / 0.9);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 22;
+    opacity: 0;
+    animation: flow 1.6s linear infinite;
+  }
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -25;
+    }
+  }
+  .network__rings circle {
+    fill: none;
+    stroke: rgb(34 211 238 / 0.5);
+    stroke-width: 1;
+    opacity: 0;
+  }
+  .network__nodes circle {
+    fill: var(--text);
+    filter: drop-shadow(0 0 5px rgb(59 130 246 / 0.9));
+  }
+
+
+  .principles {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    text-align: center;
+  }
+  :global(.story-motion) .principle {
+    grid-area: 1 / 1;
+  }
+  .principle__name {
+    margin: 0 0 1rem;
+    color: var(--cyan);
+  }
+  .principle__line {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-display);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: var(--tracking-display);
+  }
+  .principle__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: 1.75rem 0 0;
+    font-size: var(--fs-lead);
+    color: var(--muted);
+  }
+
+  .reflection {
+    max-width: 44rem;
+    text-align: center;
+  }
+  .reflection p {
+    margin: 0;
+  }
+  .reflection p + p {
+    margin-top: 1.25rem;
+    font-family: var(--font-body);
+    font-size: var(--fs-lead);
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .network__flow line {
+      animation: none;
+    }
+  }
+
+  /* Without motion: the connected network sits behind an ordinary column of text. */
+  :global(html:not(.story-motion)) .leadership .stage {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding-block: 6rem;
+  }
+  :global(html:not(.story-motion)) .network {
+    opacity: 0.35;
+  }
+  :global(html:not(.story-motion)) .network__cross line {
+    stroke-dasharray: none;
+  }
+  :global(html:not(.story-motion)) .principle + .principle {
+    margin-top: 4rem;
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+import type { ChapterHeading } from "../../story/content";
+
+interface Props {
+  heading: ChapterHeading;
+  /** id for the h2, referenced by the chapter section's aria-labelledby. */
+  id: string;
+  align?: "start" | "center";
+  class?: string;
+}
+
+const { heading, id, align = "start", class: className } = Astro.props;
+---
+
+<header class:list={["heading", `heading--${align}`, className]} data-heading>
+  <p class="label heading__label" data-reveal>{heading.label}</p>
+  <h2 id={id} class="heading__title type-headline">
+    {
+      heading.lines.map((line) => (
+        <span class="line">
+          <span data-reveal>{line}</span>
+        </span>
+      ))
+    }
+  </h2>
+  <slot />
+</header>
+
+<style>
+  .heading {
+    position: relative;
+    z-index: 2;
+  }
+  .heading--center {
+    text-align: center;
+  }
+  .heading__label {
+    margin: 0 0 1.25rem;
+  }
+  .heading__title {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,281 @@
+---
+import StoryHeading from "./StoryHeading.astro";
+import { ai } from "../../story/content";
+import { loopLayout } from "../../story/lib/layouts";
+
+const loop = loopLayout(ai.stages.length);
+const pct = (n: number) => `${((n / loop.size) * 100).toFixed(2)}%`;
+---
+
+<section id="ai" class="chapter ai" aria-labelledby="ai-title" style="--track: 540vh">
+  <div class="stage">
+    <div class="ai__phase ai__intro scrim" data-ai="intro">
+      <StoryHeading heading={ai.heading} id="ai-title">
+        <p class="ai__turn" data-ai="turn" data-reveal>{ai.turn}</p>
+      </StoryHeading>
+      <div class="ai__shift" data-ai="shift" data-reveal>
+        {ai.shift.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+
+    <figure class="ai__phase loop" data-ai="loop" data-active={ai.stages[0].id} data-reveal>
+      <div class="loop__diagram">
+        <svg viewBox={`0 0 ${loop.size} ${loop.size}`} aria-hidden="true">
+          <defs>
+            <radialGradient id="loop-core">
+              <stop offset="0" stop-color="rgb(155 124 255 / 0.35)"></stop>
+              <stop offset="1" stop-color="rgb(155 124 255 / 0)"></stop>
+            </radialGradient>
+          </defs>
+          <circle class="loop__core" cx={loop.center} cy={loop.center} r={loop.radius * 0.8} fill="url(#loop-core)"></circle>
+          <circle class="loop__ring" cx={loop.center} cy={loop.center} r={loop.radius}></circle>
+          <circle
+            class="loop__trail"
+            cx={loop.center}
+            cy={loop.center}
+            r={loop.radius}
+            pathLength="1"
+            transform={`rotate(-90 ${loop.center} ${loop.center})`}
+            data-loop="trail"
+          ></circle>
+          {loop.stages.map((s) => <circle class="loop__stage" cx={s.x} cy={s.y} r="7" />)}
+          <circle class="loop__signal" cx={loop.stages[0].x} cy={loop.stages[0].y} r="6" data-loop="signal"></circle>
+        </svg>
+        <div role="group" aria-label={ai.loopTitle}>
+          {
+            ai.stages.map((stage, i) => (
+              <button
+                type="button"
+                class="loop__option"
+                data-option={stage.id}
+                data-side={loop.stages[i].x < loop.center - 1 ? "left" : loop.stages[i].x > loop.center + 1 ? "right" : "top"}
+                style={`left: ${pct(loop.stages[i].x)}; top: ${pct(loop.stages[i].y)}`}
+              >
+                <span class="loop__index">{String(i + 1).padStart(2, "0")}</span>
+                {stage.name}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      <figcaption class="loop__notes scrim" aria-live="polite">
+        <p class="label">{ai.loopTitle}</p>
+        {
+          ai.stages.map((stage) => (
+            <p class="loop__note" data-note={stage.id}>
+              <strong>{stage.name}.</strong> {stage.note}
+            </p>
+          ))
+        }
+      </figcaption>
+    </figure>
+
+    <div class="ai__phase catalyst" data-ai="catalyst" data-reveal>
+      {
+        [ai.catalyst.now, ai.catalyst.next].map((part, i) => (
+          <div class:list={["catalyst__part", "scrim", { "catalyst__part--next": i === 1 }]}>
+            <p class="label catalyst__label">{part.label}</p>
+            <p class="catalyst__body type-statement">{part.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .ai .stage {
+    display: grid;
+    align-items: center;
+    padding: var(--bar-height) var(--gutter) 2rem;
+  }
+  :global(.story-motion) .ai__phase {
+    grid-area: 1 / 1;
+  }
+  .ai__phase {
+    position: relative;
+    z-index: 2;
+  }
+
+  .ai__intro {
+    max-width: 62rem;
+  }
+  .ai__turn {
+    margin: 1rem 0 0;
+    max-width: 22ch;
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: clamp(1.75rem, 1rem + 2.6vw, 3.25rem);
+    line-height: 1.1;
+    color: var(--violet);
+  }
+  .ai__shift {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+    max-width: 56rem;
+    color: var(--muted);
+    font-size: var(--fs-lead);
+  }
+  .ai__shift p {
+    margin: 0;
+  }
+
+  .loop {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    margin: 0;
+  }
+  .loop__diagram {
+    position: relative;
+    width: min(100%, 68svh);
+    justify-self: center;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .loop__ring {
+    fill: none;
+    stroke: rgb(152 166 187 / 0.18);
+    stroke-width: 1;
+  }
+  .loop__trail {
+    fill: none;
+    stroke: var(--cyan);
+    stroke-width: 2;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    filter: drop-shadow(0 0 6px rgb(34 211 238 / 0.8));
+  }
+  .loop__stage {
+    fill: var(--slate);
+    stroke: rgb(152 166 187 / 0.5);
+    stroke-width: 1.5;
+  }
+  .loop__signal {
+    fill: var(--text);
+    filter: drop-shadow(0 0 10px rgb(34 211 238)) drop-shadow(0 0 20px rgb(155 124 255));
+  }
+
+  .loop__option {
+    position: absolute;
+    translate: -50% -50%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid rgb(152 166 187 / 0.18);
+    border-radius: 10px;
+    background: rgb(9 19 35 / 0.75);
+    backdrop-filter: blur(8px);
+    color: var(--muted);
+    font: 500 0.9375rem/1.2 var(--font-display);
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  /* Labels sit outside the ring, away from the center. */
+  .loop__option[data-side="top"] {
+    translate: -50% -125%;
+  }
+  .loop__option[data-side="left"] {
+    translate: -110% -50%;
+  }
+  .loop__option[data-side="right"] {
+    translate: 10% -50%;
+  }
+  .loop__option:hover,
+  .loop__option[aria-pressed="true"] {
+    color: var(--text);
+    border-color: rgb(34 211 238 / 0.6);
+    box-shadow: 0 0 24px rgb(34 211 238 / 0.2);
+  }
+  .loop__index {
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+  }
+
+  .loop__notes {
+    max-width: 30rem;
+  }
+  .loop__notes .label {
+    margin: 0 0 1rem;
+  }
+  .loop__note {
+    margin: 0;
+    font-size: var(--fs-lead);
+    color: var(--muted);
+  }
+  .loop__note strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+
+  .catalyst {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 5rem);
+    max-width: 72rem;
+  }
+  .catalyst__label {
+    margin: 0 0 1rem;
+    color: var(--cyan);
+  }
+  .catalyst__part--next .catalyst__label {
+    color: var(--violet);
+  }
+  .catalyst__body {
+    margin: 0;
+  }
+  .catalyst__part--next .catalyst__body {
+    color: var(--muted);
+  }
+
+  :global(html:not(.story-motion)) .ai .stage {
+    gap: 5rem;
+    padding-block: 6rem;
+  }
+  :global(html:not(.story-motion)) .loop__note + .loop__note {
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 767px) {
+    .ai__shift,
+    .catalyst {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .ai__shift {
+      font-size: 1rem;
+    }
+    .loop {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .loop__diagram {
+      width: min(72vw, 40svh);
+    }
+    .loop__option {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.45rem;
+    }
+    .loop__note {
+      font-size: 0.9375rem;
+    }
+    .loop__note strong {
+      font-size: 1.375rem;
+    }
+  }
+</style>

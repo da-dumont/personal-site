@@ -1,0 +1,251 @@
+---
+import { Picture, getImage } from "astro:assets";
+import headshot from "../../assets/story/headshot-cutout.png";
+import { introduction } from "../../story/content";
+
+// The rim light is masked to the portrait's own silhouette.
+const silhouette = await getImage({ src: headshot, format: "webp", width: 858 });
+const lastLine = introduction.statement.length - 1;
+---
+
+<section id="introduction" class="chapter intro" aria-labelledby="introduction-title" style="--track: 260vh">
+  <div class="stage">
+    <div class="intro__copy" data-intro="copy">
+      <h1 id="introduction-title" class="intro__name" data-intro="name" data-reveal>
+        {introduction.name}
+        <span class="label intro__role">{introduction.role}</span>
+      </h1>
+      <p class="intro__statement">
+        {
+          introduction.statement.map((line, i) => (
+            <span class="line" data-intro-line>
+              <span data-reveal>
+                {line}
+                {i === lastLine && (
+                  <>
+                    {" "}
+                    <em class="accent">{introduction.statementAccent}</em>
+                  </>
+                )}
+              </span>
+            </span>
+          ))
+        }
+      </p>
+    </div>
+    <p class="intro__supporting" data-intro="supporting" data-reveal>{introduction.supporting}</p>
+
+    <div class="portrait" data-intro="portrait" data-reveal style={`--silhouette: url(${silhouette.src})`}>
+      <Picture
+        src={headshot}
+        formats={["avif", "webp"]}
+        widths={[480, 858]}
+        sizes="(max-width: 767px) 90vw, 45vw"
+        alt={introduction.portraitAlt}
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="portrait__light" aria-hidden="true"></div>
+    </div>
+
+    <div class="cue" data-intro="cue" aria-hidden="true">
+      <span class="cue__inner label" data-intro="cue-inner" data-reveal>Scroll <span class="cue__line"></span></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Copy and supporting text stack in the first column; the portrait and cue float over the stage. */
+  .intro .stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    padding: var(--bar-height) var(--gutter) 0;
+  }
+
+  .intro__copy {
+    position: relative;
+    z-index: 2;
+    max-width: min(60rem, 62vw);
+    transform-origin: left center;
+  }
+
+  .intro__name {
+    margin: 0 0 1.75rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .intro__statement {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-display);
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: var(--tracking-display);
+  }
+
+  .intro__statement .accent {
+    font-size: 1.08em;
+    margin-left: 0.04em;
+  }
+
+  .intro__supporting {
+    position: relative;
+    z-index: 2;
+    margin: 2.25rem 0 0;
+    max-width: 34ch;
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .portrait {
+    position: absolute;
+    right: max(var(--gutter), 3vw);
+    bottom: 0;
+    z-index: 1;
+    height: min(90svh, 62rem);
+    aspect-ratio: 858 / 914;
+    transform-origin: 50% 80%;
+    -webkit-mask-image:
+      linear-gradient(to bottom, #000 58%, transparent 97%),
+      linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to bottom, #000 58%, transparent 97%),
+      linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
+    mask-composite: intersect;
+  }
+
+  /* Light from behind: a soft violet-blue halo around the head. */
+  .portrait::before {
+    content: "";
+    position: absolute;
+    inset: 4% 10% 30%;
+    background: radial-gradient(closest-side, rgb(155 124 255 / 0.35), rgb(59 130 246 / 0.12) 60%, transparent);
+    filter: blur(20px);
+  }
+
+  .portrait :global(img) {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Rim light and grade, clipped to the silhouette: cool light from the left, violet from the right, shadow below. */
+  .portrait__light {
+    position: absolute;
+    inset: 0;
+    -webkit-mask: var(--silhouette) center / contain no-repeat;
+    mask: var(--silhouette) center / contain no-repeat;
+    background:
+      linear-gradient(to top, rgb(5 7 13 / 0.75), transparent 45%),
+      linear-gradient(95deg, rgb(59 130 246 / 0.45), transparent 22%, transparent 78%, rgb(155 124 255 / 0.4));
+    mix-blend-mode: soft-light;
+  }
+
+  .cue {
+    position: absolute;
+    left: var(--gutter);
+    bottom: 2rem;
+    z-index: 2;
+  }
+  .cue__inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .cue__line {
+    display: block;
+    width: 3rem;
+    height: 1px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+    transform-origin: left;
+    animation: cue 2.4s var(--ease-out) infinite;
+  }
+  @keyframes cue {
+    0% { transform: scaleX(0); opacity: 1; }
+    70% { transform: scaleX(1); opacity: 1; }
+    100% { transform: scaleX(1); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cue__line {
+      animation: none;
+    }
+  }
+
+  /* Without motion the chapter is an ordinary screen: text, then the portrait beside it. */
+  :global(html:not(.story-motion)) .intro .stage {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    column-gap: var(--gutter);
+  }
+  :global(html:not(.story-motion)) .portrait {
+    position: relative;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    right: auto;
+    align-self: end;
+    height: auto;
+    width: 100%;
+  }
+  :global(html:not(.story-motion)) .cue {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .intro .stage {
+      align-content: start;
+      padding-top: calc(var(--bar-height) + 4svh);
+    }
+    .intro__copy {
+      max-width: none;
+    }
+    .intro__name {
+      margin-bottom: 1.25rem;
+    }
+    .portrait {
+      left: 50%;
+      right: auto;
+      translate: -50% 0;
+      height: 58svh;
+    }
+    /* Laid over the portrait's faded lower edge. */
+    .intro__supporting {
+      position: absolute;
+      left: var(--gutter);
+      right: var(--gutter);
+      bottom: 2rem;
+      z-index: 2;
+      max-width: none;
+      font-size: 1rem;
+      text-shadow: 0 1px 12px rgb(5 7 13 / 0.9);
+    }
+    .cue {
+      display: none;
+    }
+    :global(html:not(.story-motion)) .intro .stage {
+      grid-template-columns: 1fr;
+    }
+    :global(html:not(.story-motion)) .portrait {
+      grid-column: 1;
+      grid-row: auto;
+      translate: none;
+      left: auto;
+      width: 100%;
+      height: auto;
+    }
+    :global(html:not(.story-motion)) .intro__supporting {
+      position: static;
+    }
+  }
+</style>

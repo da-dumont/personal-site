@@ -1,0 +1,153 @@
+---
+import { CHAPTERS, CONTACT, introduction } from "../../story/content";
+
+const pad = (n: number) => String(n).padStart(2, "0");
+const total = pad(CHAPTERS.length);
+---
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <a class="wordmark" href="/" data-wordmark>{introduction.name}</a>
+
+  <button class="progress label" popovertarget="chapter-index">
+    <span class="visually-hidden">Chapter&nbsp;</span>
+    <span data-progress-number>01</span> / {total}
+    <span class="progress__dash" aria-hidden="true">—</span>
+    <span data-progress-label>{CHAPTERS[0].label}</span>
+  </button>
+  <nav id="chapter-index" class="index" popover aria-label="Chapters" data-chapter-index>
+    <ol>
+      {
+        CHAPTERS.map((chapter, i) => (
+          <li>
+            <a href={`#${chapter.id}`}>
+              <span class="index__number">{pad(i + 1)}</span>
+              {chapter.label}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </nav>
+
+  <a class="contact" href={`mailto:${CONTACT.email}`}>Say hello</a>
+</header>
+
+<style>
+  .bar {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 10;
+    height: var(--bar-height);
+    padding: 0 var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    pointer-events: none;
+  }
+  .bar > * {
+    pointer-events: auto;
+  }
+
+  .wordmark {
+    justify-self: start;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  /* The wordmark fades in after the intro; keyboard focus must never land on something invisible. */
+  .wordmark:focus-visible {
+    opacity: 1 !important;
+  }
+
+  .progress {
+    background: none;
+    border: 0;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.7;
+    transition: opacity 0.4s var(--ease-out);
+  }
+  .progress:hover,
+  .progress:focus-visible {
+    opacity: 1;
+  }
+  .progress__dash {
+    margin: 0 0.35em;
+  }
+
+  .contact {
+    justify-self: end;
+    font-size: 0.875rem;
+    text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.5s var(--ease-out);
+    padding-bottom: 2px;
+  }
+  .contact:hover,
+  .contact:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .index {
+    position: fixed;
+    inset: calc(var(--bar-height) - 0.5rem) 0 auto;
+    margin: 0 auto;
+    width: min(22rem, calc(100% - 2 * var(--gutter)));
+    padding: 0.75rem;
+    border: 1px solid rgb(152 166 187 / 0.15);
+    border-radius: 14px;
+    background: rgb(9 19 35 / 0.8);
+    backdrop-filter: blur(18px);
+    color: var(--text);
+  }
+  .index ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .index a {
+    display: flex;
+    gap: 1rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.3s, background 0.3s;
+  }
+  .index a:hover,
+  .index a:focus-visible,
+  .index a[aria-current] {
+    color: var(--text);
+    background: rgb(152 166 187 / 0.08);
+  }
+  .index__number {
+    font-variant-numeric: tabular-nums;
+    color: var(--cyan);
+  }
+
+  .skip {
+    position: fixed;
+    top: 0.75rem;
+    left: 50%;
+    z-index: 20;
+    transform: translate(-50%, -200%);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: var(--text);
+    color: var(--obsidian);
+  }
+  .skip:focus-visible {
+    transform: translate(-50%, 0);
+  }
+
+  @media (max-width: 767px) {
+    .progress__dash,
+    [data-progress-label] {
+      display: none;
+    }
+  }
+</style>

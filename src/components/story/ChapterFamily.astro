@@ -1,0 +1,103 @@
+---
+import StoryHeading from "./StoryHeading.astro";
+import { family } from "../../story/content";
+---
+
+<section id="family" class="chapter family" aria-labelledby="family-title" style="--track: 380vh">
+  <div class="stage">
+    <div class="family__warmth" aria-hidden="true" data-family="warmth"></div>
+    <div class="family__text">
+      <StoryHeading heading={family.heading} id="family-title" />
+      <div class="family__body">
+        {family.body.map((paragraph, i) => <p class="type-statement" data-family-line={i} data-reveal>{paragraph}</p>)}
+      </div>
+    </div>
+    <ul class="family__details" aria-label="A few things about home">
+      {family.details.map((detail) => <li data-family-detail data-reveal>{detail}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .family .stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 6rem);
+    padding: var(--bar-height) var(--gutter) 2rem;
+  }
+
+  /* A low, warm light, like a lamp left on. */
+  .family__warmth {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(55% 45% at 30% 60%, rgb(255 155 84 / 0.16), transparent 70%),
+      radial-gradient(30% 30% at 75% 40%, rgb(255 155 84 / 0.08), transparent 70%);
+    pointer-events: none;
+  }
+
+  .family__text,
+  .family__details {
+    position: relative;
+    z-index: 2;
+  }
+  .family :global(.heading__label) {
+    color: var(--amber);
+  }
+  .family__body {
+    margin-top: 2.5rem;
+    max-width: 40rem;
+  }
+  .family__body p {
+    margin: 0;
+  }
+  .family__body p + p {
+    margin-top: 1.25rem;
+    color: var(--muted);
+  }
+
+  .family__details {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-left: 1px solid rgb(255 155 84 / 0.35);
+  }
+  .family__details li {
+    padding: 0.7rem 0 0.7rem 1.25rem;
+    color: var(--muted);
+  }
+  .family__details li::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.75rem;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 10px var(--amber);
+    vertical-align: middle;
+  }
+
+  :global(html:not(.story-motion)) .family .stage {
+    padding-block: 6rem;
+  }
+
+  @media (max-width: 767px) {
+    .family .stage {
+      grid-template-columns: 1fr;
+      align-content: center;
+      gap: 1.5rem;
+    }
+    .family__body {
+      margin-top: 1.25rem;
+    }
+    .family__body p {
+      font-size: 1.125rem;
+    }
+    .family__details li {
+      padding-block: 0.35rem;
+      font-size: 0.875rem;
+    }
+  }
+</style>

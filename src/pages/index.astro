@@ -1,13 +1,40 @@
 ---
+import StoryLayout from "../layouts/StoryLayout.astro";
 import PageMeta from "../components/PageMeta.astro";
-import PageLayout from "../layouts/PageLayout.astro";
-import Intro from "../components/Intro.astro";
+import Atmosphere from "../components/story/Atmosphere.astro";
+import StoryBar from "../components/story/StoryBar.astro";
+import ChapterIntroduction from "../components/story/ChapterIntroduction.astro";
+import ChapterPerson from "../components/story/ChapterPerson.astro";
+import ChapterBuilding from "../components/story/ChapterBuilding.astro";
+import ChapterLeadership from "../components/story/ChapterLeadership.astro";
+import ChapterAI from "../components/story/ChapterAI.astro";
+import ChapterWork from "../components/story/ChapterWork.astro";
+import ChapterLessons from "../components/story/ChapterLessons.astro";
+import ChapterFamily from "../components/story/ChapterFamily.astro";
+import ChapterNext from "../components/story/ChapterNext.astro";
+import ChapterClosing from "../components/story/ChapterClosing.astro";
 import { SITE_TITLE } from "../config";
+import { introduction } from "../story/content";
 ---
 
-<PageLayout>
-  <PageMeta title={`${SITE_TITLE}`} slot="meta" />
-  <Fragment slot="main">
-    <Intro />
-  </Fragment>
-</PageLayout>
+<StoryLayout>
+  <PageMeta title={SITE_TITLE} description={introduction.supporting} slot="meta" />
+  <Atmosphere />
+  <StoryBar />
+  <main id="main">
+    <ChapterIntroduction />
+    <ChapterPerson />
+    <ChapterBuilding />
+    <ChapterLeadership />
+    <ChapterAI />
+    <ChapterWork />
+    <ChapterLessons />
+    <ChapterFamily />
+    <ChapterNext />
+    <ChapterClosing />
+  </main>
+</StoryLayout>
+
+<script>
+  import "../story/main";
+</script>

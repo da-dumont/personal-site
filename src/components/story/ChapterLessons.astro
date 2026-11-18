@@ -1,0 +1,77 @@
+---
+import StoryHeading from "./StoryHeading.astro";
+import { lessons } from "../../story/content";
+---
+
+<section id="lessons" class="chapter lessons" aria-labelledby="lessons-title" style="--track: 660vh">
+  <div class="stage">
+    <StoryHeading heading={lessons.heading} id="lessons-title" align="center" />
+    <ol class="statements">
+      {
+        lessons.statements.map((statement, i) => (
+          <li class="statement" data-statement={i} data-reveal>
+            <p class="statement__line">{statement.line}</p>
+            <p class="statement__body">{statement.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .lessons .stage {
+    display: grid;
+    place-items: center;
+    padding: var(--bar-height) var(--gutter);
+  }
+  :global(.story-motion) .lessons .stage > :global(*),
+  :global(.story-motion) .statement {
+    grid-area: 1 / 1;
+  }
+
+  .statements {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+  }
+  .statement__line {
+    margin: 0 auto;
+    max-width: 18ch;
+    font-family: var(--font-display);
+    font-size: var(--fs-display);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: var(--tracking-display);
+    text-wrap: balance;
+  }
+  .statement__body {
+    margin: 2rem auto 0;
+    max-width: 42ch;
+    font-size: var(--fs-lead);
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+
+  :global(html:not(.story-motion)) .lessons .stage {
+    gap: 5rem;
+    padding-block: 6rem;
+  }
+  :global(html:not(.story-motion)) .statement + .statement {
+    margin-top: 5rem;
+  }
+  :global(html:not(.story-motion)) .statement__line {
+    font-size: var(--fs-headline);
+  }
+
+  @media (max-width: 767px) {
+    .statement__line {
+      font-size: clamp(2.25rem, 10vw, 3rem);
+    }
+    .statement__body {
+      font-size: 1rem;
+    }
+  }
+</style>

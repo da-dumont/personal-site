@@ -1,0 +1,205 @@
+---
+import StoryHeading from "./StoryHeading.astro";
+import { building } from "../../story/content";
+import { architectureLayout, edgeAttrs, morphAttrs } from "../../story/lib/layouts";
+
+const layout = architectureLayout(building.layers.length);
+const pct = (y: number) => `${((y / layout.height) * 100).toFixed(2)}%`;
+---
+
+<section id="building" class="chapter building" aria-labelledby="building-title" style="--track: 440vh">
+  <div class="stage">
+    <div class="building__text">
+      <StoryHeading heading={building.heading} id="building-title" />
+      <ol class="beats">
+        {
+          building.beats.map((beat, i) => (
+            <li class="beat" data-beat={i} data-reveal>
+              <span class="label beat__number">0{i + 1}</span>
+              <h3 class="beat__title">{beat.title}</h3>
+              <p class="beat__body">{beat.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <figure class="system" data-building="system" data-reveal>
+      <div class="system__diagram">
+        <svg viewBox={`0 0 ${layout.width} ${layout.height}`} aria-hidden="true" data-building="svg">
+          {
+            layout.rows.map((y, i) => (
+              <rect
+                class="band"
+                data-band={building.layers[i].id}
+                x="24"
+                y={y - 36}
+                width={layout.width - 48}
+                height="72"
+                rx="18"
+              />
+            ))
+          }
+          <g class="edges">{layout.edges.map((edge) => <line {...edgeAttrs(edge, layout.nodes)} />)}</g>
+          <g class="nodes">{layout.nodes.map((node) => <circle data-node r="5" {...morphAttrs(node)} />)}</g>
+        </svg>
+        <div class="layers" data-building="layers" role="group" aria-label="Layers of a product">
+          {
+            building.layers.map((layer, i) => (
+              <button type="button" class="layer" data-option={layer.id} style={`top: ${pct(layout.rows[i])}`}>
+                {layer.name}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      <figcaption class="system__notes" aria-live="polite" data-building="notes">
+        <p class="system__hint" data-note-hint>{building.layersHint}</p>
+        {
+          building.layers.map((layer) => (
+            <p class="system__note" data-note={layer.id}>
+              <strong>{layer.name}.</strong> {layer.note}
+            </p>
+          ))
+        }
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .building .stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 6rem);
+    padding: var(--bar-height) var(--gutter) 2rem;
+  }
+
+  .beats {
+    display: grid;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  /* With motion, the beats take turns in one place. */
+  :global(.story-motion) .beat {
+    grid-area: 1 / 1;
+  }
+  :global(html:not(.story-motion)) .beat + .beat {
+    margin-top: 2rem;
+  }
+  .beat__number {
+    color: var(--cyan);
+  }
+  .beat__title {
+    margin: 0.5rem 0 0.75rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1rem + 1.6vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  .beat__body {
+    margin: 0;
+    max-width: 38ch;
+    font-size: var(--fs-lead);
+    color: var(--muted);
+  }
+
+  .system {
+    margin: 0;
+  }
+  .system__diagram {
+    position: relative;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .band {
+    fill: rgb(16 27 45 / 0.55);
+    stroke: rgb(152 166 187 / 0.14);
+    transition: fill 0.4s var(--ease-out), stroke 0.4s var(--ease-out);
+  }
+  .edges line {
+    stroke: rgb(59 130 246 / 0.35);
+    stroke-width: 1;
+  }
+  .nodes circle {
+    fill: var(--cyan);
+    filter: drop-shadow(0 0 6px rgb(34 211 238 / 0.8));
+  }
+
+  .layer {
+    position: absolute;
+    left: 4.5%;
+    translate: 0 -50%;
+    padding: 0.35rem 0.6rem;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: var(--muted);
+    font: 500 0.875rem/1.2 var(--font-display);
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: color 0.3s, background 0.3s;
+  }
+  .layer:hover,
+  .layer[aria-pressed="true"] {
+    color: var(--text);
+    background: rgb(34 211 238 / 0.1);
+  }
+
+  /* The chosen layer's band lights up. */
+  [data-active="customer"] .band[data-band="customer"],
+  [data-active="experience"] .band[data-band="experience"],
+  [data-active="logic"] .band[data-band="logic"],
+  [data-active="platform"] .band[data-band="platform"],
+  [data-active="signals"] .band[data-band="signals"] {
+    fill: rgb(34 211 238 / 0.08);
+    stroke: rgb(34 211 238 / 0.55);
+  }
+
+  .system__notes {
+    min-height: 5.5rem;
+    margin-top: 1.25rem;
+    padding-left: 4.5%;
+    color: var(--muted);
+  }
+  .system__notes p {
+    margin: 0;
+    max-width: 52ch;
+  }
+  .system__notes strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  :global(html:not(.story-motion)) .system__note + .system__note {
+    margin-top: 0.75rem;
+  }
+
+  @media (max-width: 767px) {
+    .building .stage {
+      grid-template-columns: 1fr;
+      align-content: start;
+      gap: 1.25rem;
+      padding-top: calc(var(--bar-height) + 1rem);
+    }
+    .beats {
+      margin-top: 1.25rem;
+    }
+    .beat__body {
+      font-size: 1rem;
+    }
+    .system__notes {
+      min-height: 4.5rem;
+      font-size: 0.9375rem;
+    }
+    :global(.story-motion) .building :global(.heading__title) {
+      font-size: clamp(1.75rem, 8vw, 2.25rem);
+    }
+  }
+</style>

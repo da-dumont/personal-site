@@ -1,0 +1,258 @@
+---
+import StoryHeading from "./StoryHeading.astro";
+import { work } from "../../story/content";
+---
+
+<section id="work" class="chapter work" aria-labelledby="work-title" style="--track: 460vh">
+  <div class="stage">
+    <StoryHeading heading={work.heading} id="work-title" />
+    <div class="work__viewport">
+      <ol class="work__track" data-work="track">
+        {
+          work.chapters.map((chapter) => (
+            <li class:list={["case", `case--${chapter.id}`]}>
+              {/* Abstract compositions, not product imagery. */}
+              <div class="case__visual" aria-hidden="true">
+                <span class="case__years-mark">{chapter.years}</span>
+                <span class="case__shape" />
+              </div>
+              <div class="case__text">
+                <p class="label case__years">{chapter.years}</p>
+                <h3 class="case__company">
+                  {chapter.company}
+                  <span class="case__product">{chapter.product}</span>
+                </h3>
+                <p class="case__summary">{chapter.summary}</p>
+                <details class="case__roles">
+                  <summary>{chapter.roles.length > 1 ? `${chapter.roles.length} roles` : "Role"}</summary>
+                  <ol>
+                    {chapter.roles.map((role) => (
+                      <li>
+                        <span>{role.title}</span>
+                        <span class="case__role-years">{role.years}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </details>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* One screen-wide column: the track inside is wider and travels across it. */
+  .work .stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 2rem;
+    padding: calc(var(--bar-height) + 1rem) 0 2rem;
+  }
+  /* The heading is StoryHeading's element, outside this component's style scope. */
+  .work :global(.heading) {
+    padding-inline: var(--gutter);
+  }
+  .work :global(.heading__title) {
+    font-size: clamp(2rem, 1rem + 3vw, 3.75rem);
+  }
+
+  .work__viewport {
+    min-height: 0;
+  }
+  .work__track {
+    display: flex;
+    gap: clamp(2rem, 6vw, 7rem);
+    width: max-content;
+    height: 100%;
+    margin: 0;
+    padding: 0 var(--gutter);
+    list-style: none;
+  }
+
+  .case {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    width: min(78vw, 68rem);
+  }
+
+  .case__visual {
+    position: relative;
+    aspect-ratio: 1;
+    max-height: 56svh;
+    border-radius: 28px;
+    overflow: hidden;
+    background:
+      radial-gradient(70% 60% at 30% 25%, rgb(var(--case-rgb) / 0.22), transparent 70%),
+      linear-gradient(160deg, var(--slate), var(--obsidian));
+    border: 1px solid rgb(152 166 187 / 0.12);
+  }
+  .case__years-mark {
+    position: absolute;
+    left: 8%;
+    bottom: 6%;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 1rem + 4vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(244 246 252 / 0.22);
+  }
+  .case__shape {
+    position: absolute;
+    inset: 18%;
+  }
+
+  /* Catalyst: a lit loop, echoing chapter 05. */
+  .case--catalyst {
+    --case-rgb: 155 124 255;
+  }
+  .case--catalyst .case__shape {
+    border-radius: 50%;
+    border: 1.5px solid rgb(34 211 238 / 0.7);
+    box-shadow: 0 0 40px rgb(34 211 238 / 0.35), inset 0 0 60px rgb(155 124 255 / 0.3);
+  }
+  .case--catalyst .case__shape::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: calc(50% - 6px);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--text);
+    box-shadow: 0 0 16px var(--cyan);
+  }
+
+  /* LinkSquares: platform layers, stacked and offset. */
+  .case--linksquares {
+    --case-rgb: 59 130 246;
+  }
+  .case--linksquares .case__shape {
+    border: 1.5px solid rgb(59 130 246 / 0.7);
+    border-radius: 18px;
+    box-shadow:
+      18px 18px 0 -1.5px var(--obsidian),
+      18px 18px 0 0 rgb(59 130 246 / 0.45),
+      36px 36px 0 -1.5px var(--obsidian),
+      36px 36px 0 0 rgb(59 130 246 / 0.25);
+    translate: -18px -18px;
+  }
+
+  /* Constant Contact, 2009–2021: twelve rising bars, one per year. */
+  .case--constant-contact {
+    --case-rgb: 34 211 238;
+  }
+  .case--constant-contact .case__shape {
+    background: repeating-linear-gradient(
+      90deg,
+      rgb(34 211 238 / 0.55) 0 4%,
+      transparent 4% 8.33%
+    );
+    clip-path: polygon(0 100%, 0 85%, 100% 5%, 100% 100%);
+    opacity: 0.8;
+  }
+
+  .case__years {
+    margin: 0 0 0.75rem;
+    color: var(--cyan);
+  }
+  .case__company {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1rem + 3vw, 3.75rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: var(--tracking-display);
+  }
+  .case__product {
+    display: block;
+    margin-top: 0.4rem;
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.6em;
+    letter-spacing: -0.01em;
+    color: var(--violet);
+  }
+  .case__summary {
+    margin: 1.5rem 0 0;
+    max-width: 42ch;
+    font-size: var(--fs-lead);
+    color: var(--muted);
+  }
+
+  .case__roles {
+    margin-top: 1.5rem;
+    max-width: 42ch;
+  }
+  .case__roles summary {
+    cursor: pointer;
+    width: fit-content;
+    font: 500 0.875rem/1.4 var(--font-display);
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+  .case__roles ol {
+    max-height: 30svh;
+    overflow: auto;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-left: 1px solid rgb(152 166 187 / 0.2);
+  }
+  .case__roles li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.35rem 0 0.35rem 1rem;
+    font-size: 0.875rem;
+  }
+  .case__role-years {
+    flex: none;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Without motion, the cases stack instead of travelling sideways. */
+  :global(html:not(.story-motion)) .work__track {
+    flex-direction: column;
+    width: auto;
+    gap: 5rem;
+  }
+  :global(html:not(.story-motion)) .case {
+    width: auto;
+  }
+
+  @media (max-width: 767px) {
+    .work .stage {
+      gap: 1.25rem;
+    }
+    .case {
+      grid-template-columns: 1fr;
+      align-content: start;
+      gap: 1rem;
+      width: 84vw;
+    }
+    .case__visual {
+      aspect-ratio: 16 / 9;
+      max-height: 20svh;
+      border-radius: 18px;
+    }
+    .case__years {
+      display: none;
+    }
+    .case__summary {
+      font-size: 0.9375rem;
+      margin-top: 1rem;
+    }
+    .case__roles ol {
+      max-height: 22svh;
+    }
+  }
+</style>

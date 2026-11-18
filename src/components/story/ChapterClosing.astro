@@ -1,0 +1,124 @@
+---
+import { CONTACT, closing, introduction } from "../../story/content";
+---
+
+<section id="closing" class="chapter closing" aria-labelledby="closing-title" style="--track: 260vh">
+  <div class="stage">
+    <div class="closing__line" aria-hidden="true" data-closing="line"></div>
+
+    <div class="closing__content">
+      <h2 id="closing-title" class="label closing__name" data-closing="name" data-reveal>{introduction.name}</h2>
+      <p class="closing__statement">
+        {
+          closing.statement.map((line) => (
+            <span class="line">
+              <span data-reveal>{line}</span>
+            </span>
+          ))
+        }
+        <span class="line">
+          <span data-reveal><em class="accent">{closing.accent}</em></span>
+        </span>
+      </p>
+      <p class="closing__invitation" data-closing="invitation" data-reveal>{closing.invitation}</p>
+      <ul class="closing__links" data-closing="links" data-reveal>
+        <li><a class="closing__email" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li>
+        {
+          CONTACT.profiles.map((profile) => (
+            <li>
+              <a href={profile.href} rel="me noopener" target="_blank">
+                {profile.label}
+              </a>
+            </li>
+          ))
+        }
+        <li><a href="/blog">Writing</a></li>
+      </ul>
+    </div>
+
+    <p class="closing__footer label">© {new Date().getFullYear()} {introduction.name}</p>
+  </div>
+</section>
+
+<style>
+  .closing .stage {
+    display: grid;
+    place-items: center;
+    padding: var(--bar-height) var(--gutter) 2rem;
+    text-align: center;
+  }
+
+  /* A single thin line of light that crosses the screen before the last words. */
+  .closing__line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue) 20%, var(--cyan) 50%, var(--violet) 80%, transparent);
+    box-shadow: 0 0 18px rgb(34 211 238 / 0.8);
+    transform-origin: left center;
+  }
+
+  .closing__content {
+    position: relative;
+    z-index: 2;
+  }
+  .closing__name {
+    margin: 0 0 2rem;
+    color: var(--text);
+  }
+  .closing__statement {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-headline);
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: var(--tracking-display);
+  }
+  .closing__invitation {
+    margin: 2.5rem 0 0;
+    font-size: var(--fs-lead);
+    color: var(--muted);
+  }
+  .closing__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 2rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .closing__links a {
+    font-weight: 500;
+    text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.5s var(--ease-out), color 0.3s;
+    padding-bottom: 2px;
+  }
+  .closing__links a:hover,
+  .closing__links a:focus-visible {
+    color: var(--cyan);
+    background-size: 100% 1px;
+  }
+  .closing__email {
+    color: var(--text);
+  }
+
+  .closing__footer {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    margin: 0;
+    font-size: 0.6875rem;
+  }
+
+  :global(html:not(.story-motion)) .closing .stage {
+    padding-block: 8rem 5rem;
+  }
+  :global(html:not(.story-motion)) .closing__line {
+    top: 3rem;
+  }
+</style>
