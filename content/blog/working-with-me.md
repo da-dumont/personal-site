@@ -2,70 +2,146 @@
 external: false
 title: "Working with me"
 previewImage: /images/working-with-me.avif
-description: "How I like to work"
+description: "A guide to how I work, what I value, and what you can expect from me."
 date: 2024-03-16
 ---
-_The following is the same document I send to folks that I work with for them to get to know a little bit about me, my working style, and what I value most._
+_This is the same document I share with the people I work with, so they can get to know me, how I work and what I value. If you don't have one of your own, now is a good time to write it._
 
-_If you don't have your own then now is the perfect time to write one!_
-
-__latest revision: January 28, 2024__
+_Last updated April 2026._
 
 {% previewimage src="/images/working-with-me.avif" alt="This is what you can expect working with me" /%}
 
-## [JobTitle] at [Company]
+## Director of Engineering at Constant Contact
 
-Welcome! If you're reading this, you're likely someone I work with closely at *[Company]*. I've created this document to share my leadership philosophy, working style, and expectations. I believe strongly that our success is built on relationships, clear communication, and shared understanding of our goals.
+Welcome. I'm glad you're here. This document is meant to give you a sense of who I am, how I work, and what you can expect from me. The better we understand each other, the more we can do together.
 
-At *[Company]*, I measure our success not just by what we deliver, but by how well we work together as a unified team with clear direction. I believe that when every team member understands our objectives and feels ownership of our mission, we create better outcomes for our customers and ourselves. My role is to ensure we have this clarity and alignment, making sure everyone knows how their work connects to our larger purpose. This means regular discussions about goals, open dialogue about challenges, and celebrating our collective achievements.
+## A bit about me
 
-## A Brief Introduction
+I live in Massachusetts with my wife, our kids and two red Labs. My roots are in front-end engineering. Outside of work I stay active, go on adventures with my family, read, and tinker with AI. I listen to an eclectic mix of music. Avicii, Blink-182, Otis Redding, Black Sabbath. There is no pattern and no end. I am a huge sports fan. There is a good chance something is on in my house at any given moment.
 
-I live in Massachusets with my wife, our two sons, and our two red Labrador retrievers. I come from the world of front-end engineering, specializing in JavaScript, CSS, and HTML. Beyond work, I enjoy traveling to new places, spending time at my family's lake house, reading, listening to music, watching and playing sports, and staying active and healthy.
+In the Predictive Index behavioral assessment, my profile is Maverick. It maps well to how I show up at work. I tend to be direct and decisive, and I'm comfortable taking a strong position and defending it. I'm driven by results and I move fast, but I genuinely enjoy the people side of this work. Building real relationships and developing the people around me is something I care about as much as what we ship.
 
-## My Role & How I Think About Leadership
+## My role and how I think about it
 
-As *[JobTitle]*, I see my role as being a catalyst for both team and individual success. I'm passionate about driving strategic initiatives that move *[Company]* forward while creating an environment where everyone can do their best work. I believe in fostering a culture where learning and growth are constant, where we take ownership of our decisions, and where we're obsessed with delivering value to our customers. Their success drives our decisions, and their feedback shapes our direction.
+As Director of Engineering, my job is to create the conditions for great work. Clear goals, the right people in the right seats, strong cross-functional relationships, and consistent delivery of things that matter to customers.
 
-I love building bridges across the organization - whether that's partnering with other teams, mentoring colleagues, or helping everyone understand how their work connects to the bigger picture. I'm deeply committed to helping each person on our team grow and develop in their career, while ensuring our engineering practices can scale and evolve with our success.
+I organize my focus around four areas:
 
-### Our Ways of Working
+- **Strategic impact.** Setting direction, surfacing tradeoffs, and keeping engineering work tied to what the business needs.
+- **Team resilience.** Building autonomous teams that stay productive under pressure.
+- **Operational efficiency.** Removing friction, shortening feedback loops, and making high-quality work easier to do.
+- **Career development.** Investing in the people on my team in ways that build their confidence and capability over time.
 
-I believe in creating an environment where great work can happen naturally. Here's what that looks like in practice:
+## How I lead
 
-When it comes to working as one product and one team, I encourage breaking down silos and focusing on shared outcomes rather than individual achievements. You'll find that I'm a big proponent of efficient collaboration - this means fewer but more purposeful meetings, eliminating redundancy wherever we find it, and making sure our engineering, product, and design teams work together seamlessly.
+### Stay close to the work
 
-I'm a strong believer in team autonomy and ownership. I'll provide context and direction, but I trust you to make decisions within your domain. I want you to feel empowered to experiment, test ideas with users, and take ownership of your work. At the same time, I believe in looking at our work through a market lens - understanding our competitors, planning for user feedback, and always aiming to leapfrog what's currently possible.
+I stay engaged with what teams are building. The goal is to understand the work well enough to ask useful questions and make sound tradeoffs. Delegation matters to me, but it doesn't mean disengaging.
 
-## How I Like to Work
+### Anticipate before reacting
 
-Let's talk about the practical stuff - how we can work together effectively. I'm typically online from 9:00 AM to 5:00 PM EST. I believe in taking breaks to stay fresh, so you'll find me stepping away for 45-60 minutes during lunch for some fresh air and a mental reset. I block out three 90-minute focus periods each week for deep work, but otherwise, I'm highly available.
+I'm constantly scanning for what's ahead. Delivery risks, team health, technical debt starting to accumulate. If something looks like a problem, I'd rather name it early and be wrong than stay quiet and watch it grow.
 
-Slack is my go-to for communication - feel free to DM me anytime, even outside of work hours. For anything urgent, don't hesitate to call or text me at *[PhoneNumber]*. I use "speedy meetings" in my calendar to ensure we all have time to context-switch between discussions.
+### Build strong teams, then trust them
 
-Our one-on-one meetings are your time - I want you to drive the agenda with what's most important to you, whether that's discussing your growth, working through challenges, or diving deep into technical problems. I believe in giving timely, specific feedback, and I'll always aim to celebrate your wins publicly (with your comfort) while handling any constructive feedback privately.
+I hire and develop people I'd want to work for. I give them context and clear goals, then get out of the way. I expect them to make decisions, surface issues early, and own their outcomes. When I push back on a direction, it's because I think something is off, not because I don't trust the team.
 
-When it comes to decision-making, I prefer to delegate authority and trust your judgment. I'm here to provide context and remove obstacles, not to prescribe solutions. I'd rather see you run experiments and learn from them than wait for permission.
+### Outcomes over activity
 
-## What You Can Expect From Me
+What shipped? What changed? What did we learn? A team moving fast but not making progress is a problem worth understanding. Busy is not the goal.
 
-I'm committed to supporting your growth and success. This means regular conversations about your career aspirations, opportunities to stretch yourself, and exposure to strategic initiatives that can help build your influence and impact. I'll work to create an environment where you feel safe to experiment and learn, where expectations are clear, and where your contributions are recognized.
+### Tolerate ambiguity, then resolve it
 
-I believe in protecting the team's time and focus, so I'll work to shield you from distractions and unnecessary meetings. I'm also deeply committed to technical excellence, supporting innovation while ensuring we maintain sustainable engineering practices.
+Most hard problems don't come with clean answers. I try to hold space for uncertainty and resist forcing premature decisions. When it's time to commit, I'll push toward resolution.
 
-## What I Hope to See
+## How I think about building
 
-I value initiative and proactive communication. I love working with people who take ownership of their work, communicate early and often, and learn from both successes and setbacks. I appreciate those who embrace challenges with a growth mindset, stay curious, and help others grow alongside them.
+These aren't rigid rules. They're the postures I default to when making product and engineering decisions. If you understand these, a lot of what I say and do will make sense without much explanation.
 
-Most importantly, I want to see us all focusing on impact - understanding the business context, delivering value to our customers, and thinking strategically about our technical decisions.
+### Customer first
 
-## A Note on Work-Life Balance
+Every decision runs through one question: does this make things better for the person using the product? Not cleaner internally, not more architecturally elegant. If we can't answer that, it's worth pausing before we build.
 
-I believe strongly in maintaining a sustainable pace and personal wellbeing. I encourage you to take time off when needed, communicate about schedule constraints, and step away from work to recharge. Your health and family should always come first.
+### Bias to action
 
-## Let's Connect
+I'd rather decide with 70% of the information and course-correct than wait for certainty that isn't coming. Indecision has a cost most people underestimate. When things are unclear, my instinct is to move and adjust, not stall.
 
-I'm excited to work with you and help you grow at *[Company]*. Feel free to reach out anytime - I'm here to support your success. Remember, this is a living document that will evolve as we learn how to work best together.
+### Start thin, then scale
 
----
-*This is a living document that evolves with our working relationship.*
+Get something real in front of users quickly, learn what matters, and build from there. The thing you expect to be hard often isn't. What you didn't anticipate usually is. Thin slices generate feedback before you've over-committed, and that feedback is almost always more useful than the original plan.
+
+### 80% of the value, 20% of the work
+
+Most features have a core that delivers the bulk of the value. Find that version, ship it, validate it, and then decide if the rest is worth building.
+
+### Two-way door decisions
+
+Most decisions are reversible. If you can undo it, try it. If it doesn't work, fix it. I want teams moving through two-way doors with confidence, not waiting for approval. Architectural commitments and vendor decisions that are hard to walk back deserve slower, more deliberate treatment. Learning to tell the difference is a skill I develop in engineers at every level.
+
+### Design for adaptability, not correctness
+
+Early decisions compound. A name becomes an abstraction. An abstraction becomes a pattern. A pattern becomes architecture. Being right up front matters less than being easy to change later. I favor systems that are explicit and straightforward over ones that are clever and rigid. Make being wrong recoverable.
+
+### AI-native building
+
+Something real is shifting in how teams work. When generating code is cheap and fast, the old walls between engineering, product, and design start to matter less. Builders are builders. The work looks more like a shared craft than a handoff chain.
+
+The bottleneck used to be writing enough code. It isn't anymore. Speed breaks in two places now. Before anything exists, teams lose time on unclear context, blocked questions, and ownership gaps. After something is built, the bottleneck shifts to review queues and the gap between done and shipped. My job is to compress both.
+
+The deeper shift is how we think about learning. The old model was plan, build, release. What I'm pushing toward is frame, build, observe, adjust. A prototype in two hours beats a two-day design doc. A feature shipped to a small cohort with clear signal beats a broad launch with vague engagement data. Shipping is not progress if nothing is learned from it.
+
+### Work in the open
+
+The default in most engineering orgs is to share work when it's done. I want to flip that. Share it while it's in progress.
+
+That means drafts over decks, open PRs over finished code, questions in public channels over DMs, and prototypes in front of people before they're polished. When work is visible early, others can contribute, spot problems, and stay aligned without a meeting. When it's hidden until completion, coordination becomes a handoff, and handoffs are where things break.
+
+Working in the open is about lowering the cost of staying in sync. A quick post that says "here's what I'm working on and where I'm stuck" does more than a status update on Friday.
+
+I try to model this myself. I'll share early thinking, flag when I'm uncertain, and invite input before I've made up my mind. I expect the same from the team.
+
+## How I work day to day
+
+### Availability
+
+- Core hours are 9:00 AM to 5:00 PM Eastern.
+- I take a midday break most days and protect a few deep work blocks each week. If my calendar looks blocked, it's usually one of those.
+- Slack works for most things. Reach out anytime.
+- For anything urgent, call or text me.
+
+### 1:1s
+
+You own the agenda. This time belongs to you, not to status updates. Bring what's on your mind. A decision you're stuck on, a career question, something that's been frustrating you. That's what it's for.
+
+### Feedback
+
+I try to give feedback that's timely and specific. I'll recognize good work publicly when you're comfortable with it and coach privately when something needs to be addressed. I appreciate directness in return. If something I'm doing is making your work harder, I want to know.
+
+### Decisions
+
+I trust the judgment of the people closest to the work. If that's you, own it. I'm here to provide context and remove blockers, not to sit in an approval chain for decisions that belong to you. If something is hard to reverse or has significant cross-team implications, bring me in early.
+
+## What I expect
+
+**Ownership.** Take initiative. Raise issues early and come with a perspective on how to address them. When something goes wrong, own the recovery and share what you learned.
+
+**Honest communication.** I can work with bad news. Finding out too late is harder. If something is off track, surface it while there's still room to respond.
+
+**Business context.** Understand why your work matters. If you can't connect what you're building to a customer need or a business goal, ask. I'd rather explain it ten times than have the team solving the wrong problem.
+
+**A growth orientation.** I don't expect perfection. I expect effort, reflection, and forward motion. Stretch into things that are uncomfortable. Share what you learn.
+
+## What you can expect from me
+
+- Clear context on goals and how your work connects to the bigger picture.
+- Advocacy for your work and growth with the broader organization.
+- Protection of your time from unnecessary meetings and overhead.
+- Directness, even when the conversation is uncomfortable.
+- Honest feedback on where you stand, with no surprises in performance conversations.
+- Accountability to the same standards I hold you to.
+
+## On pace and balance
+
+Sustainable work matters to me. I take time off and encourage you to do the same. Burnout doesn't happen because people are weak. It happens when organizations ask too much for too long without recovery built in. If the way we're working is wearing you down, I want to hear about it.
+
+I'm so glad we're working together. Reach out anytime!
