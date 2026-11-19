@@ -1,7 +1,7 @@
 import { chapterTimeline } from "./chapterTimeline";
 import { fadeAway, pick, revealHeading } from "./reveal";
 
-/** Chapter 06. Scrolling down carries the career sideways, newest first. */
+/** Chapter 05. Scrolling down carries the career sideways, newest first. */
 export function workTimeline(section: HTMLElement): void {
   const track = pick(section, "work", "track");
   const viewport = track.parentElement!;

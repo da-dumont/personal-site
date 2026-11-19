@@ -1,7 +1,7 @@
 import { chapterTimeline } from "./chapterTimeline";
 import { all, fadeAway, fadeUp, pick, revealHeading, staggered } from "./reveal";
 
-/** Chapter 08. The light warms, the words arrive slowly, and the small real details follow. */
+/** Chapter 07. The light warms, the words arrive slowly, and the small real details follow. */
 export function familyTimeline(section: HTMLElement): void {
   const lines = all(section, "[data-family-line]");
   const details = all(section, "[data-family-detail]");

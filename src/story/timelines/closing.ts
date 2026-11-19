@@ -2,7 +2,7 @@ import { chapterTimeline } from "./chapterTimeline";
 import { all, fadeUp, pick, staggered } from "./reveal";
 
 /**
- * Chapter 10. Near-black; a line of light crosses the screen and settles into a thin horizon,
+ * Chapter 09. Near-black; a line of light crosses the screen and settles into a thin horizon,
  * then the name and the last words. The story ends here, so nothing leaves.
  */
 export function closingTimeline(section: HTMLElement): void {

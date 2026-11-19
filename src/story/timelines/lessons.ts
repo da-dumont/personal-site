@@ -1,7 +1,7 @@
 import { chapterTimeline } from "./chapterTimeline";
 import { all, revealHeading, showBetween } from "./reveal";
 
-/** Chapter 07. Quiet: one statement at a time holds the screen, then gives way to the next. */
+/** Chapter 06. Quiet: one statement at a time holds the screen, then gives way to the next. */
 export function lessonsTimeline(section: HTMLElement): void {
   const statements = all(section, "[data-statement]");
   const start = 0.14;

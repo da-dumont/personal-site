@@ -5,11 +5,9 @@ import type { ParticleField } from "./scene/ParticleField";
 import { startSmoothScroll } from "./motion/smoothScroll";
 import { driveScene } from "./motion/sceneDriver";
 import { trackChapterProgress } from "./ui/chapterProgress";
-import { picker } from "./interactive/picker";
 import { intelligenceLoop, type IntelligenceLoop } from "./interactive/loop";
 import { introductionTimeline } from "./timelines/introduction";
 import { personTimeline } from "./timelines/person";
-import { buildingTimeline } from "./timelines/building";
 import { leadershipTimeline } from "./timelines/leadership";
 import { aiTimeline } from "./timelines/ai";
 import { workTimeline } from "./timelines/work";
@@ -30,7 +28,6 @@ interface Explorers {
 const TIMELINES: Record<ChapterId, (section: HTMLElement, context: { phone: boolean; explorers: Explorers }) => void> = {
   introduction: (section, { phone }) => introductionTimeline(section, { phone }),
   person: personTimeline,
-  building: buildingTimeline,
   leadership: leadershipTimeline,
   ai: (section, { explorers }) => explorers.loop && aiTimeline(section, explorers.loop),
   work: workTimeline,
@@ -42,8 +39,6 @@ const TIMELINES: Record<ChapterId, (section: HTMLElement, context: { phone: bool
 
 /** The optional interactive pieces. They work with or without motion; scrolling never requires them. */
 function startExplorers(animate: boolean): Explorers {
-  const layers = document.querySelector<HTMLElement>("[data-building='system']");
-  if (layers) picker(layers);
   const loop = document.querySelector<HTMLElement>("[data-ai='loop']");
   return { loop: loop ? intelligenceLoop(loop, { animate }) : null };
 }

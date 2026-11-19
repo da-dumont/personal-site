@@ -1,7 +1,7 @@
 import { chapterTimeline } from "./chapterTimeline";
 import { all, fadeAway, fadeUp, pick, revealHeading, staggered } from "./reveal";
 
-/** Chapter 09. What I'm exploring arrives item by item; then the writing takes the stage. */
+/** Chapter 08. What I'm exploring arrives item by item; then the writing takes the stage. */
 export function nextTimeline(section: HTMLElement): void {
   const exploring = pick(section, "next", "exploring");
   const writing = pick(section, "next", "writing");

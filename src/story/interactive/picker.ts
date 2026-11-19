@@ -1,5 +1,5 @@
 /*
-  One-of-several explorers (architecture layers, the intelligence loop). Buttons carry
+  A one-of-several explorer, used by the intelligence loop. Buttons carry
   data-option="id"; notes carry data-note="id". Without JS every note is visible, so the
   content reads as a plain list. With JS only the chosen note shows, and the root's
   data-active lets CSS light up the matching part of the diagram.

@@ -7,7 +7,7 @@ export interface IntelligenceLoop {
 }
 
 /**
- * Chapter 05's Understand → Recommend → Act → Measure → Learn loop. A signal travels the ring
+ * Chapter 04's Understand → Recommend → Act → Measure → Learn loop. A signal travels the ring
  * (leaving a lit trail), and each stage can be chosen directly to read about it.
  */
 export function intelligenceLoop(figure: HTMLElement, { animate }: { animate: boolean }): IntelligenceLoop {

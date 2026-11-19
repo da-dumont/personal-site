@@ -105,41 +105,27 @@ const drifting: SceneState = {
   glow: { x: 40, y: 58, color: PALETTE.blue, strength: 0.45 },
 };
 
-/** Chapter 03: the ribbon flattens into an orderly plane below the diagram, like a grid floor. */
-const structured: SceneState = {
+/** Chapter 03: the network carries the scene; the ribbon steps back. */
+const network: SceneState = {
   ...drifting,
-  camera: [0, 1.8, 11],
-  target: [0, -0.6, 0],
-  offset: [0, -2.3, -3],
+  camera: [0, 0.6, 12],
+  target: [0, 0, 0],
+  offset: [0, -2.6, -4],
   roll: 0,
-  opacity: 0.6,
-  amp: 0.18,
+  opacity: 0.3,
+  amp: 0.5,
   freq: 0.35,
-  twist: 0.15,
-  width: 2.4,
+  twist: 1.2,
+  width: 1.4,
   speed: 0.2,
   colorA: PALETTE.blue,
   colorB: PALETTE.cyan,
   colorC: PALETTE.blue,
-  dust: 0.5,
-  glow: { x: 70, y: 50, color: PALETTE.blue, strength: 0.45 },
-};
-
-/** Chapter 04: the network carries the scene; the ribbon steps back. */
-const network: SceneState = {
-  ...structured,
-  camera: [0, 0.6, 12],
-  target: [0, 0, 0],
-  offset: [0, -2.6, -4],
-  opacity: 0.3,
-  amp: 0.5,
-  twist: 1.2,
-  width: 1.4,
   dust: 0.7,
   glow: { x: 50, y: 50, color: PALETTE.violet, strength: 0.35 },
 };
 
-/** Chapter 05: dense, complex, close: the camera moves into the system. */
+/** Chapter 04: dense, complex, close: the camera moves into the system. */
 const intelligence: SceneState = {
   ...network,
   camera: [0, 0.3, 6.2],
@@ -160,7 +146,7 @@ const intelligence: SceneState = {
   glow: { x: 35, y: 50, color: PALETTE.violet, strength: 0.6 },
 };
 
-/** Chapter 06: calm and low, out of the way of the career panels. */
+/** Chapter 05: calm and low, out of the way of the career panels. */
 const horizon: SceneState = {
   ...intelligence,
   camera: [0, 0.4, 10],
@@ -179,7 +165,7 @@ const horizon: SceneState = {
   glow: { x: 60, y: 80, color: PALETTE.blue, strength: 0.35 },
 };
 
-/** Chapter 07: almost dark. A few faint lights remain. */
+/** Chapter 06: almost dark. A few faint lights remain. */
 const quiet: SceneState = {
   ...horizon,
   opacity: 0.08,
@@ -188,7 +174,7 @@ const quiet: SceneState = {
   glow: { x: 50, y: 50, color: PALETTE.blue, strength: 0.12 },
 };
 
-/** Chapter 08: warm and slow. */
+/** Chapter 07: warm and slow. */
 const warm: SceneState = {
   ...horizon,
   camera: [0, 0.2, 9.5],
@@ -206,7 +192,7 @@ const warm: SceneState = {
   glow: { x: 32, y: 60, color: PALETTE.amber, strength: 0.6 },
 };
 
-/** Chapter 09: the opening ribbon returns, carrying a little of everything since. */
+/** Chapter 08: the opening ribbon returns, carrying a little of everything since. */
 const evolved: SceneState = {
   ...opening,
   camera: [0, 0.5, 9.5],
@@ -225,7 +211,7 @@ const evolved: SceneState = {
   glow: { x: 60, y: 40, color: PALETTE.cyan, strength: 0.45 },
 };
 
-/** Chapter 10: everything converges into a thin line of light, low, beneath the last words. */
+/** Chapter 09: everything converges into a thin line of light, low, beneath the last words. */
 const converged: SceneState = {
   ...evolved,
   camera: [0, 0, 10],
@@ -249,8 +235,6 @@ export const SCENE_KEYS: readonly SceneKey[] = [
   { chapter: "introduction", at: 0.8, state: behindPortrait },
   { chapter: "person", at: 0.15, state: pulledBack },
   { chapter: "person", at: 0.9, state: drifting },
-  { chapter: "building", at: 0.25, state: structured },
-  { chapter: "building", at: 0.9, state: structured },
   { chapter: "leadership", at: 0.15, state: network },
   { chapter: "leadership", at: 0.9, state: network },
   { chapter: "ai", at: 0.2, state: intelligence },

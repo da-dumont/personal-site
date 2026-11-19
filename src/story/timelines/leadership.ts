@@ -3,7 +3,7 @@ import { chapterTimeline } from "./chapterTimeline";
 import { all, fadeAway, fadeUp, pick, revealHeading, showBetween, staggered } from "./reveal";
 
 /**
- * Chapter 04. A scattered set of people draws together into teams, and the teams connect.
+ * Chapter 03. A scattered set of people draws together into teams, and the teams connect.
  * Each principle changes the network: Accountability gives every node a ring of ownership,
  * Clarity brightens the connections, Urgency sets signals flowing along them.
  */

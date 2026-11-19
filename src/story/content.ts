@@ -7,7 +7,6 @@
 export type ChapterId =
   | "introduction"
   | "person"
-  | "building"
   | "leadership"
   | "ai"
   | "work"
@@ -26,7 +25,6 @@ export interface ChapterMeta {
 export const CHAPTERS: readonly ChapterMeta[] = [
   { id: "introduction", label: "Introduction" },
   { id: "person", label: "Beyond the title" },
-  { id: "building", label: "How I build" },
   { id: "leadership", label: "Leadership" },
   { id: "ai", label: "Building with AI" },
   { id: "work", label: "The work" },
@@ -77,53 +75,6 @@ export interface ChapterHeading {
   lines: readonly string[];
 }
 
-export const building = {
-  heading: { label: "How I build", lines: ["The problem", "comes first."] },
-  beats: [
-    {
-      title: "Understand the problem.",
-      body: "The question I keep coming back to is whether this makes things better for the person using it. Hard problems rarely show up with clean answers. I'll sit in the ambiguity long enough to understand it, as long as the team keeps moving.",
-    },
-    {
-      title: "Make the complicated understandable.",
-      body: "Early decisions compound. A name turns into an abstraction, and a few of those harden into architecture. So I'll pick plain, explicit code over clever code that's hard to change.",
-    },
-    {
-      title: "Ship the part that matters.",
-      body: "Get something real in front of people quickly and learn from it. Most features have a small core that carries most of the value. I ship that first and watch how people use it before deciding if the rest is worth building.",
-    },
-  ],
-  /** The layers of the interactive diagram, top to bottom. */
-  layers: [
-    {
-      id: "customer",
-      name: "Customer",
-      note: "The test is whether it's better for the person using it. If we can't say how, I'd pause before we build.",
-    },
-    {
-      id: "experience",
-      name: "Experience",
-      note: "My roots are in front-end engineering and design. How a product feels to use is part of whether it works.",
-    },
-    {
-      id: "logic",
-      name: "Product logic",
-      note: "Find the version that gets most of the value for a fraction of the work. Ship it and learn from it before deciding what else to build.",
-    },
-    {
-      id: "platform",
-      name: "Platform",
-      note: "Some early calls will be wrong. Build so they're cheap to undo.",
-    },
-    {
-      id: "signals",
-      name: "Signals",
-      note: "I'd rather ship to a small group and get a clear signal than launch wide and get vague engagement numbers.",
-    },
-  ],
-  layersHint: "Select a layer to see how I think about it.",
-} as const;
-
 export const leadership = {
   heading: { label: "Leadership", lines: ["Good teams get built", "on purpose."] },
   principles: [
@@ -141,7 +92,7 @@ export const leadership = {
   ],
   reflection: [
     "Most of leading a team is coaching. I help engineers build judgment and make sure they know why their work matters.",
-    "I try to hire people I'd want to work for. I give them context and clear goals and then get out of their way. I like engineers who push back on me and have opinions about the product. They should understand what they ship, even when an AI wrote it.",
+    "I try to hire people I'd want to work for. I give them context and clear goals and then get out of their way. I like engineers who push back on me and have opinions about the product.",
   ],
 } as const;
 
@@ -256,10 +207,6 @@ export const lessons = {
       body: "I can work with bad news. Finding out too late is harder. Being direct gives people a chance to respond while there's still time.",
     },
     {
-      line: "Ownership means caring what happens after you ship.",
-      body: "When something goes wrong, own the recovery and share what you learned.",
-    },
-    {
       line: "AI can write the code. You still have to understand it.",
       body: "Models sound just as confident when they're wrong. I expect engineers to know what they're shipping.",
     },
@@ -273,13 +220,13 @@ export const lessons = {
 export const family = {
   heading: { label: "Beyond the code", lines: ["What matters", "most to me", "is at home."] },
   body: [
-    "I'm a husband and a dad. I care about the work, and my family comes first.",
+    "I care about the work, and my family comes first.",
     "I want to do meaningful work and still be there for the moments that only happen once.",
   ],
   /** Small, real details: no names, no town. */
   details: [
     "My wife and our three kids",
-    "Two red Labs, Yeti and Grizzly",
+    "Two red Labs",
     "A game on in the house, more often than not",
     "A playlist with no pattern: Avicii, Blink-182, Otis Redding, Black Sabbath",
     "Adventures with the family, books, and tinkering with AI",
@@ -297,7 +244,6 @@ export const next = {
     "How AI changes the shape of engineering organizations",
     "Better ways to develop and evaluate agent systems",
     "Helping engineers become stronger product thinkers",
-    "Teams that own outcomes",
     "The human side of engineering",
   ],
   writingLabel: "Writing",

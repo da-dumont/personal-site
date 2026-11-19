@@ -3,7 +3,7 @@ import { chapterTimeline } from "./chapterTimeline";
 import { fadeAway, fadeUp, pick, revealHeading } from "./reveal";
 
 /**
- * Chapter 05, in three movements on one stage: the shift in how we build; the intelligence loop,
+ * Chapter 04, in three movements on one stage: the shift in how we build; the intelligence loop,
  * with scroll carrying a signal once around it; then Catalyst, what exists now and where it's going.
  */
 export function aiTimeline(section: HTMLElement, loop: IntelligenceLoop): void {

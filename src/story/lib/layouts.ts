@@ -32,35 +32,7 @@ export const edgeAttrs = (edge: LayoutEdge, nodes: LayoutNode[]) => ({
 });
 
 /**
- * Chapter 03's system: starts as scattered, tangled points; settles into one row of nodes per layer,
- * each node wired to its neighbors in the layer below.
- */
-export function architectureLayout(layerCount: number) {
-  const width = 600;
-  const rowGap = 96;
-  const top = 64;
-  const perRow = 6;
-  const random = seededRandom(3);
-  const rows = Array.from({ length: layerCount }, (_, i) => top + i * rowGap);
-  const nodes: LayoutNode[] = rows.flatMap((y) =>
-    Array.from({ length: perRow }, (_, j) => ({
-      from: [40 + random() * 520, 30 + random() * (rows.at(-1)! + 10)] as Point,
-      to: [210 + j * 64, y] as Point,
-    })),
-  );
-  const edges: LayoutEdge[] = [];
-  for (let row = 0; row < layerCount - 1; row++) {
-    for (let j = 0; j < perRow; j++) {
-      const a = row * perRow + j;
-      edges.push({ a, b: a + perRow });
-      if (random() < 0.45) edges.push({ a, b: (row + 1) * perRow + ((j + 1) % perRow) });
-    }
-  }
-  return { width, height: rows.at(-1)! + top, rows, nodes, edges };
-}
-
-/**
- * Chapter 04's team network: three teams of people, scattered and disconnected at first,
+ * Chapter 03's team network: three teams of people, scattered and disconnected at first,
  * then drawn into tight groups with connections across them.
  */
 export function networkLayout() {
@@ -102,7 +74,7 @@ export function networkLayout() {
   return { width, height, nodes, local, cross };
 }
 
-/** Chapter 05's loop: stages evenly around a circle, the first at the top. */
+/** Chapter 04's loop: stages evenly around a circle, the first at the top. */
 export function loopLayout(stageCount: number, size = 480, radius = 170) {
   const center = size / 2;
   const angleOf = (i: number) => -Math.PI / 2 + (i / stageCount) * Math.PI * 2;
